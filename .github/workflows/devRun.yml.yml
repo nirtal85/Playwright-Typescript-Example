@@ -18,7 +18,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Run Playwright tests
-      run: xvfb-run npx playwright test
+      run: xvfb-run npx playwright test --grep "@devRun"
     - name: Link Git Information And Browser Version To Allure Report
       working-directory: allure-results
       if: always()
