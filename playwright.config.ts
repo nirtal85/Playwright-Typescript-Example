@@ -43,7 +43,6 @@ export default defineConfig({
         // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
           args: ['--disable-web-security', '--start-maximized'],
-          channel: 'chrome',
           headless: false,
         },
       },
