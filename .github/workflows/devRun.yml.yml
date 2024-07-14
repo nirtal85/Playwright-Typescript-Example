@@ -3,7 +3,7 @@ name: Pre merge test
 on:
   pull_request:
     branches: [ main ]
-
+    
 jobs:
   merge_test:
     timeout-minutes: 15
@@ -24,10 +24,4 @@ jobs:
       with:
         name: playwright-report
         path: playwright-report/
-        retention-days: 30
-    - name: Deploy Report To Github Pages
-      if: always()
-      uses: peaceiris/actions-gh-pages@v4
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: test-results
+        retention-days: 30    
