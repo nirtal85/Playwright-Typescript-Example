@@ -3,7 +3,7 @@ name: Pre merge test
 on:
   pull_request:
     branches: [ main ]
-    
+
 jobs:
   merge_test:
     timeout-minutes: 15
@@ -19,9 +19,30 @@ jobs:
       run: npm ci
     - name: Run Playwright tests
       run: xvfb-run npx playwright test
-    - uses: actions/upload-artifact@v4
+    - name: Link Git Information And Browser Version To Allure Report
+      working-directory: allure-results
       if: always()
+      run: |
+        {
+         echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+         echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}
+         echo GIT_COMMIT_ID=${{ github.sha }}
+         echo GIT_COMMIT_MESSAGE=$(git show -s --format=%s HEAD)
+         echo GIT_COMMIT_AUTHOR_NAME=$(git show -s --format='%ae' HEAD)
+         echo GIT_COMMIT_TIME=$(git show -s --format=%ci HEAD)
+        } >> environment.properties
+    - name: Generate Allure Report
+      uses: simple-elf/allure-report-action@master
+      if: always()
+      id: allure-report
       with:
-        name: playwright-report
-        path: playwright-report/
-        retention-days: 30    
+        allure_results: allure-results
+        allure_report: allure-report
+        gh_pages: gh-pages
+        allure_history: allure-history
+    - name: Deploy Report To Github Pages
+      if: always()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: allure-history
