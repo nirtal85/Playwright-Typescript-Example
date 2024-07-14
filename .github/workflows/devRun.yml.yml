@@ -1,13 +1,14 @@
-name: Playwright Tests
+name: Pre merge test
+
 on:
-  push:
-    branches: [ main, master ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ main ]
 jobs:
-  test:
-    timeout-minutes: 60
+  merge_test:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
+    container:
+      image: mcr.microsoft.com/playwright:v1.45.1-jammy
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
