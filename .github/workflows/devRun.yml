@@ -23,6 +23,7 @@ jobs:
       working-directory: allure-results
       if: always()
       run: |
+        git config --global --add safe.directory "$GITHUB_WORKSPACE"
         {
          echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
          echo GIT_BRANCH=${{ github.head_ref || github.ref_name }}
