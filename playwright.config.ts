@@ -1,4 +1,4 @@
-import { defineConfig } from '@playwright/test';
+import { defineConfig } from "@playwright/test";
 
 /**
  * Read environment variables from file.
@@ -33,13 +33,13 @@ export default defineConfig({
           },
           {
             type: "tms",
-            urlTemplate: "https://example.org/tasks/%s"
+            urlTemplate: "https://example.org/tasks/%s",
           },
           {
             type: "custom",
-            urlTemplate: "https://example.org/custom/%s"
+            urlTemplate: "https://example.org/custom/%s",
           },
-        ]
+        ],
       },
     ],
   ],
@@ -57,16 +57,16 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: 'chromium',
+      name: "chromium",
       use: {
         viewport: null,
         // Set the storage state here if you have only one user to login.
         // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
-          args: ['--disable-web-security', '--start-maximized'],
+          args: ["--disable-web-security", "--start-maximized"],
           headless: false,
         },
       },
     },
-  ]
+  ],
 });
