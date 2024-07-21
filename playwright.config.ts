@@ -1,4 +1,4 @@
-import { defineConfig } from "@playwright/test";
+import { defineConfig } from '@playwright/test';
 
 /**
  * Read environment variables from file.
@@ -11,7 +11,7 @@ import { defineConfig } from "@playwright/test";
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig({
-  testDir: "./tests",
+  testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -23,21 +23,21 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     [
-      "allure-playwright",
+      'allure-playwright',
       {
         links: [
           {
-            type: "issue",
-            urlTemplate: "https://example.org/issues/%s",
-            nameTemplate: "Issue: %s",
+            type: 'issue',
+            urlTemplate: 'https://example.org/issues/%s',
+            nameTemplate: 'Issue: %s',
           },
           {
-            type: "tms",
-            urlTemplate: "https://example.org/tasks/%s",
+            type: 'tms',
+            urlTemplate: 'https://example.org/tasks/%s',
           },
           {
-            type: "custom",
-            urlTemplate: "https://example.org/custom/%s",
+            type: 'custom',
+            urlTemplate: 'https://example.org/custom/%s',
           },
         ],
       },
@@ -49,21 +49,21 @@ export default defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    screenshot: "only-on-failure",
-    trace: "retain-on-failure",
-    video: "retain-on-failure",
+    screenshot: 'only-on-failure',
+    trace: 'retain-on-failure',
+    video: 'retain-on-failure',
   },
 
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: 'chromium',
       use: {
         viewport: null,
         // Set the storage state here if you have only one user to login.
         // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
-          args: ["--disable-web-security", "--start-maximized"],
+          args: ['--disable-web-security', '--start-maximized'],
           headless: false,
         },
       },
