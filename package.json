@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "prepare": "husky install"
+  },
   "keywords": [],
   "author": "Nir Tal",
   "license": "ISC",
@@ -17,11 +19,22 @@
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-prettier": "^5.2.1",
+    "husky": "9.1.2",
+    "lint-staged": "15.2.7",
     "prettier": "3.3.3",
     "typescript": "5.5.3"
   },
   "dependencies": {
     "allure-playwright": "3.0.0-beta.7",
     "eslint-plugin-import": "2.29.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml}": [
+      "prettier --write"
+    ]
   }
 }
