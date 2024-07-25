@@ -18,7 +18,7 @@
     "eslint-plugin-playwright": "^1.6.2",
     "eslint-plugin-prettier": "^5.2.1",
     "prettier": "3.3.3",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "dependencies": {
     "allure-playwright": "3.0.0-beta.7",
