@@ -10,7 +10,7 @@
   "author": "Nir Tal",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "1.45.3",
+    "@playwright/test": "1.46.0",
     "@stylistic/eslint-plugin": "^2.3.0",
     "@types/node": "20.14.13",
     "@typescript-eslint/eslint-plugin": "8.0.0",
