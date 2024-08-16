@@ -25,7 +25,7 @@
     "typescript": "5.5.4"
   },
   "dependencies": {
-    "allure-playwright": "3.0.0-beta.7",
+    "allure-playwright": "3.0.0-beta.10",
     "eslint-plugin-import": "2.29.1"
   },
   "lint-staged": {
