@@ -8,7 +8,7 @@ on:
       test_command:
         description: 'Custom test command'
         required: true
-        default: 'test'
+        default: '--grep-invert "@devRun"'
         type: string
       parallelism:
         description: 'Number of machines to split tests'
@@ -52,7 +52,7 @@ jobs:
         if: steps.cache-node-modules.outputs.cache-hit != 'true'
         run: npm ci
       - name: Run Playwright tests
-        run: xvfb-run npx playwright test --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
+        run: xvfb-run npx playwright test ${{ github.event.inputs.test_command || '--grep-invert "@devRun"' }} --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
       - name: Upload test results and artifacts
         if: always()
         uses: actions/upload-artifact@v4
