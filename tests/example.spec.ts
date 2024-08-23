@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { link, issue, tms } from 'allure-js-commons';
+import { link, issue, tms, severity } from 'allure-js-commons';
 import { allure } from 'allure-playwright';
 
 test('has title', async ({ page }) => {
@@ -16,7 +16,7 @@ test(
   },
   async ({ page }) => {
     //Specify description, links and other metadata
-    allure.severity('blocker');
+    severity('blocker');
     link('https://example.com/docs', 'Related Documentation');
     issue('https://example.com/issues/AUTH-123', 'Related Issue');
     tms('https://example.com/tms/TMS-456', 'Related Test Case');
