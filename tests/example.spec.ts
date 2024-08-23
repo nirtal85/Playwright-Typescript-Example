@@ -22,6 +22,7 @@ test(
     tms('Task Name', '352');
     //Organize tests
     allure.epic('Web interface');
+    allure.owner('John Doe');
     allure.feature('Essential features');
     allure.story('Authentication');
     await page.goto('https://playwright.dev/');
