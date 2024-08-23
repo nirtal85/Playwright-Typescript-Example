@@ -17,9 +17,9 @@ test(
   async ({ page }) => {
     //Specify description, links and other metadata
     allure.severity('blocker');
-    link('https://playwright.dev', 'link-type', 'playwright-site'); // link with name and type
-    issue('Issue Name', '352');
-    tms('Task Name', '352');
+    link('https://example.com/docs', 'Related Documentation');
+    issue('https://example.com/issues/AUTH-123', 'Related Issue');
+    tms('https://example.com/tms/TMS-456', 'Related Test Case');
     //Organize tests
     allure.epic('Web interface');
     allure.owner('John Doe');
