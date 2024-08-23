@@ -11,3 +11,5 @@ node_modules/
 *allure-results
 *allure-report
 trace.zip
+# Environments
+.env

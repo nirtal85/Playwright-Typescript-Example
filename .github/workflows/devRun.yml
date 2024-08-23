@@ -8,6 +8,8 @@ jobs:
   merge_test:
     timeout-minutes: 15
     runs-on: ubuntu-latest
+    env:
+      BASE_URL: ${{ vars.BASE_URL }}
     container:
       image: mcr.microsoft.com/playwright:v1.46.1-jammy
     steps:
