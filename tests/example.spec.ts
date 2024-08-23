@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { link, issue, tms, severity } from 'allure-js-commons';
 import { allure } from 'allure-playwright';
-import assert from 'assert';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -16,7 +15,6 @@ test(
     tag: '@devRun',
   },
   async ({ page }) => {
-    assert.fail();
     //Specify description, links and other metadata
     severity('blocker');
     link('https://example.com/docs', 'Related Documentation');
