@@ -1,4 +1,5 @@
-import { test, expect } from '@playwright/test';
+import { test } from '../fixtures/logIpOnFailure';
+import { expect } from '@playwright/test';
 import { link, issue, tms, severity } from 'allure-js-commons';
 import { allure } from 'allure-playwright';
 
