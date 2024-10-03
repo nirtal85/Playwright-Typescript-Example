@@ -1,1 +1,0 @@
-{"37e4aa066a5f6eac2e4d3b98a2ed98a7:5bd835b0d6b1d4ada3b9f0db936e82c8":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"2b4b4b4c3901237","reportUrl":"https://nirtal85.github.io/Playwright-Typescript-Example/96//#testresult/2b4b4b4c3901237","status":"passed","time":{"start":1727982063668,"stop":1727982064836,"duration":1168}}]}}
