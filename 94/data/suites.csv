@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Thu Oct 03 19:00:51 GMT 2024","Thu Oct 03 19:00:52 GMT 2024","1229","chromium","example.spec.ts","","","","get started link",""
