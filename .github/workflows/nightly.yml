@@ -33,7 +33,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.47.2-jammy
+      image: mcr.microsoft.com/playwright:v1.48.1-jammy
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     strategy:
