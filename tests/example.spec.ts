@@ -3,10 +3,13 @@ import { expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
 
 test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+  await test.step('Navigate to Playwright website', async () => {
+    await page.goto('https://playwright.dev/');
+  });
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
+  await test.step('Check page title', async () => {
+    await expect(page).toHaveTitle(/Playwright/);
+  });
 });
 
 test(
@@ -15,22 +18,25 @@ test(
     tag: '@devRun',
   },
   async ({ page }) => {
-    //Specify description, links and other metadata
     allure.severity('blocker');
     allure.link('https://example.com/docs', 'Related Documentation');
     allure.issue('https://example.com/issues/AUTH-123', 'Related Issue');
     allure.tms('https://example.com/tms/TMS-456', 'Related Test Case');
-    //Organize tests
     allure.epic('Web interface');
     allure.owner('John Doe');
     allure.feature('Essential features');
     allure.story('Authentication');
-    await page.goto('/');
 
-    // Click the get started link.
-    await page.getByRole('link', { name: 'Get started' }).click();
+    await test.step('Navigate to the base URL', async () => {
+      await page.goto('/');
+    });
 
-    // Expects page to have a heading with the name of Installation.
-    await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+    await test.step('Click the "Get started" link', async () => {
+      await page.getByRole('link', { name: 'Get started' }).click();
+    });
+
+    await test.step('Verify heading visibility', async () => {
+      await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+    });
   },
 );
