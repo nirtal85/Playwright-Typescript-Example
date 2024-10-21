@@ -1,21 +1,28 @@
-// eslint.config.js
-import eslintPlugin from '@typescript-eslint/eslint-plugin'; // Import the whole package
+import typescript from '@typescript-eslint/eslint-plugin';
+import playwright from 'eslint-plugin-playwright';
+import importPlugin from 'eslint-plugin-import';
+import typescriptParser from '@typescript-eslint/parser';
+
+const { configs: typescriptConfigs } = typescript;
 
 export default [
   {
-    files: ['*.ts'],
+    files: ['**/*.ts', '**/*.tsx'],
+    plugins: {
+      '@typescript-eslint': typescript,
+      playwright: playwright,
+      import: importPlugin, // Add the import plugin here
+    },
     languageOptions: {
-      ecmaVersion: 2022,
-      sourceType: 'module',
-      globals: {
-        Atomics: 'readonly',
-        SharedArrayBuffer: 'readonly',
+      parser: typescriptParser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        sourceType: 'module',
       },
     },
-    plugins: {
-      '@typescript-eslint': eslintPlugin, // Use the default export as the plugin
-    },
     rules: {
+      ...typescriptConfigs.recommended.rules,
+      ...playwright.configs['flat/recommended'].rules,
       indent: ['error', 2, { SwitchCase: 1 }],
       'no-console': 'error',
       'no-debugger': 'error',
@@ -39,9 +46,6 @@ export default [
       '.DS_Store',
       'Thumbs.db',
       '*_spec3.json',
-    ],
-    extends: [
-      'plugin:playwright/recommended', // Use the recommended Playwright settings
     ],
   },
 ];
