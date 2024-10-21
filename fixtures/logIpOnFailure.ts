@@ -1,5 +1,5 @@
 import { test as base } from '@playwright/test';
-import { allure } from 'allure-playwright';
+import * as allure from 'allure-js-commons';
 
 export const test = base.extend<{ logIpOnFailure: void }>({
   logIpOnFailure: [

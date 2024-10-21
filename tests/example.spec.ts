@@ -1,7 +1,6 @@
 import { test } from '../fixtures/logIpOnFailure';
 import { expect } from '@playwright/test';
-import { link, issue, tms, severity } from 'allure-js-commons';
-import { allure } from 'allure-playwright';
+import * as allure from 'allure-js-commons';
 
 test('has title', async ({ page }) => {
   await page.goto('https://playwright.dev/');
@@ -17,10 +16,10 @@ test(
   },
   async ({ page }) => {
     //Specify description, links and other metadata
-    severity('blocker');
-    link('https://example.com/docs', 'Related Documentation');
-    issue('https://example.com/issues/AUTH-123', 'Related Issue');
-    tms('https://example.com/tms/TMS-456', 'Related Test Case');
+    allure.severity('blocker');
+    allure.link('https://example.com/docs', 'Related Documentation');
+    allure.issue('https://example.com/issues/AUTH-123', 'Related Issue');
+    allure.tms('https://example.com/tms/TMS-456', 'Related Test Case');
     //Organize tests
     allure.epic('Web interface');
     allure.owner('John Doe');
