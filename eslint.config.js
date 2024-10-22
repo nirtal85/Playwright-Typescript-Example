@@ -2,6 +2,16 @@ import typescript from '@typescript-eslint/eslint-plugin';
 import playwright from 'eslint-plugin-playwright';
 import importPlugin from 'eslint-plugin-import';
 import typescriptParser from '@typescript-eslint/parser';
+import stylistic from '@stylistic/eslint-plugin';
+
+const customizedESLint = stylistic.configs.customize({
+  indent: 2,
+  quotes: 'single',
+  semi: true,
+  jsx: true,
+  commaDangle: 'never',
+  braceStyle: '1tbs',
+});
 
 const { configs: typescriptConfigs } = typescript;
 
@@ -11,18 +21,22 @@ export default [
     plugins: {
       '@typescript-eslint': typescript,
       playwright: playwright,
-      import: importPlugin, // Add the import plugin here
+      import: importPlugin,
+      '@stylistic': stylistic,
     },
     languageOptions: {
       parser: typescriptParser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
     rules: {
       ...typescriptConfigs.recommended.rules,
       ...playwright.configs['flat/recommended'].rules,
+      ...customizedESLint.rules,
       indent: ['error', 2, { SwitchCase: 1 }],
       'no-console': 'error',
       'no-debugger': 'error',
