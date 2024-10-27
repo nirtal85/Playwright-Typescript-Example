@@ -11,7 +11,7 @@
   "author": "Nir Tal",
   "license": "ISC",
   "devDependencies": {
-    "@playwright/test": "1.48.1",
+    "@playwright/test": "1.48.2",
     "@stylistic/eslint-plugin": "^2.3.0",
     "@types/node": "20.16.13",
     "@typescript-eslint/eslint-plugin": "8.11.0",
