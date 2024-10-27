@@ -19,9 +19,9 @@ test(
   },
   async ({ page }) => {
     allure.severity('blocker');
-    allure.link('https://example.com/docs', 'Related Documentation');
-    allure.issue('https://example.com/issues/AUTH-123', 'Related Issue');
-    allure.tms('https://example.com/tms/TMS-456', 'Related Test Case');
+    allure.link('docs', 'Related Documentation');
+    allure.issue('issues/AUTH-123', 'Related Issue');
+    allure.tms('tms/TMS-456', 'Related Test Case');
     allure.epic('Web interface');
     allure.owner('John Doe');
     allure.feature('Essential features');
