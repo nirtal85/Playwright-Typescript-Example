@@ -15,7 +15,7 @@ test('has title', async ({ page }) => {
 test(
   'get started link',
   {
-    tag: '@devRun',
+    tag: '@devRun'
   },
   async ({ page }) => {
     allure.severity('blocker');
@@ -38,5 +38,5 @@ test(
     await test.step('Verify heading visibility', async () => {
       await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
     });
-  },
+  }
 );

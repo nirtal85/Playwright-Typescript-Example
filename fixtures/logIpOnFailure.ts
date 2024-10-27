@@ -11,6 +11,6 @@ export const test = base.extend<{ logIpOnFailure: void }>({
         allure.attachment('IP Address', ip.trim(), 'text/plain');
       }
     },
-    { auto: true },
-  ],
+    { auto: true }
+  ]
 });

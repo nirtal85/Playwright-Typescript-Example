@@ -31,7 +31,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     screenshot: 'only-on-failure',
     trace: 'retain-on-failure',
-    video: 'retain-on-failure',
+    video: 'retain-on-failure'
   },
 
   /* Configure projects for major browsers */
@@ -44,9 +44,9 @@ export default defineConfig({
         // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
           args: ['--disable-web-security', '--start-maximized'],
-          headless: false,
-        },
-      },
-    },
-  ],
+          headless: false
+        }
+      }
+    }
+  ]
 });

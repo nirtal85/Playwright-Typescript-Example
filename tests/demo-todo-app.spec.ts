@@ -78,7 +78,7 @@ test.describe('Mark all as completed', () => {
     await expect(page.getByTestId('todo-item')).toHaveClass([
       'completed',
       'completed',
-      'completed',
+      'completed'
     ]);
     await checkNumberOfCompletedTodosInLocalStorage(page, 3);
   });
@@ -94,7 +94,7 @@ test.describe('Mark all as completed', () => {
   });
 
   test('complete all checkbox should update state when items are completed / cleared', async ({
-    page,
+    page
   }) => {
     const toggleAll = page.getByLabel('Mark all as complete');
     await toggleAll.check();
@@ -195,8 +195,8 @@ test.describe('Editing', () => {
     await expect(todoItem.getByRole('checkbox')).toBeHidden();
     await expect(
       todoItem.locator('label', {
-        hasText: TODO_ITEMS[1],
-      }),
+        hasText: TODO_ITEMS[1]
+      })
     ).toBeHidden();
     await checkNumberOfTodosInLocalStorage(page, 3);
   });
