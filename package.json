@@ -28,7 +28,7 @@
     "eslint-plugin-import": "2.31.0"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,jsx,ts,tsx,json,md,yml}": [
       "eslint --fix"
     ]
   }
