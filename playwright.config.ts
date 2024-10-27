@@ -1,3 +1,4 @@
+import { Constants } from './utilities/constants';
 import { defineConfig } from '@playwright/test';
 
 /**
@@ -61,6 +62,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         viewport: null,
+        userAgent: Constants.AUTOMATION_USER_AGENT,
         // Set the storage state here if you have only one user to login.
         // storageState: STORAGE_STATE_LOGIN,
         launchOptions: {
