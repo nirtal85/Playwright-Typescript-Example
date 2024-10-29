@@ -1,4 +1,4 @@
-import { test } from '../fixtures/logIpOnFailure';
+import { test } from '../fixtures/pageFixtures';
 import { Constants } from '../utilities/constants';
 import { expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
@@ -20,7 +20,7 @@ test(
   {
     tag: '@devRun'
   },
-  async ({ page }, testInfo) => {
+  async ({ page, homePage }, testInfo) => {
     allure.severity('blocker');
     allure.link('docs', 'Related Documentation');
     allure.issue('issues/AUTH-123', 'Related Issue');
@@ -77,7 +77,7 @@ test(
     });
 
     await test.step('Click the "Get started" link', async () => {
-      await page.getByRole('link', { name: 'Get started' }).click();
+      homePage.clickGetStarted();
     });
 
     await test.step('Verify heading visibility', async () => {
