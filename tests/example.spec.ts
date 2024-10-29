@@ -20,7 +20,7 @@ test(
   {
     tag: '@devRun'
   },
-  async ({ page }) => {
+  async ({ page }, testInfo) => {
     allure.severity('blocker');
     allure.link('docs', 'Related Documentation');
     allure.issue('issues/AUTH-123', 'Related Issue');
@@ -30,35 +30,32 @@ test(
     allure.feature('Essential features');
     allure.story('Authentication');
 
-    allure.attachment(
+    testInfo.attach(
       'HTML Attachment Example',
-      '<h1>Example html attachment</h1>',
-      'text/html'
+      { body: '<h1>Example html attachment</h1>',
+        contentType: 'text/html'
+      }
     );
 
-    allure.attachment(
+    testInfo.attach(
       'Text Attachment Example',
-      'Some text content',
-      'text/plain'
+      { body: 'Some text content', contentType: 'text/plain' }
     );
 
-    allure.attachment(
+    testInfo.attach(
       'CSV Attachment Example',
-      'first,second,third\none,two,three',
-      'text/csv'
+      { body: 'first,second,third\none,two,three', contentType: 'text/csv' }
     );
 
     const filePath = path.join(Constants.DATA_PATH, 'dog.png');
-    allure.attachment(
+    testInfo.attach(
       'File Attachment Example',
-      readFileSync(filePath),
-      'image/png'
+      { body: readFileSync(filePath), contentType: 'image/png' }
     );
 
-    allure.attachment(
+    testInfo.attach(
       'JSON Attachment Example',
-      JSON.stringify({ first: 1, second: 2 }, null, 2),
-      'application/json'
+      { body: JSON.stringify({ first: 1, second: 2 }, null, 2), contentType: 'application/json' }
     );
 
     const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
@@ -66,21 +63,15 @@ test(
     <inside>...</inside>
 </tag>
 `;
-    allure.attachment(
+    testInfo.attach(
       'XML Attachment Example',
-      xmlContent,
-      'application/xml'
+      { body: xmlContent, contentType: 'application/xml' }
     );
 
-    allure.attachment(
+    testInfo.attach(
       'URI List Attachment Example',
-      [
-        'https://github.com/allure-framework',
-        'https://github.com/allure-examples'
-      ].join('\n'),
-      'text/uri-list'
+      { body: ['https://github.com/allure-framework', 'https://github.com/allure-examples'].join('\n'), contentType: 'text/uri-list' }
     );
-
     await test.step('Navigate to the base URL', async () => {
       await page.goto('/');
     });

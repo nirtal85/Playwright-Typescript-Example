@@ -1,5 +1,4 @@
 import { test as base } from '@playwright/test';
-import * as allure from 'allure-js-commons';
 
 export const test = base.extend<{ logIpOnFailure: void }>({
   logIpOnFailure: [
@@ -8,7 +7,11 @@ export const test = base.extend<{ logIpOnFailure: void }>({
       if (testInfo.status !== testInfo.expectedStatus) {
         const response = await request.get('https://checkip.amazonaws.com');
         const ip = await response.text();
-        allure.attachment('IP Address', ip.trim(), 'text/plain');
+
+        testInfo.attach(
+          'IP Address',
+          { body: ip.trim(), contentType: 'text/plain' }
+        );
       }
     },
     { auto: true }
