@@ -24,8 +24,9 @@
   },
   "dependencies": {
     "allure-playwright": "3.0.5",
-    "dotenv": "^16.4.5",
-    "eslint-plugin-import": "2.31.0"
+    "dotenv": "16.4.5",
+    "eslint-plugin-import": "2.31.0",
+    "xlsx": "0.18.5"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,yml}": [
