@@ -62,6 +62,7 @@ export default defineConfig({
       name: 'chromium',
       use: {
         viewport: null,
+        testIdAttribute: 'data-test',
         userAgent: Constants.AUTOMATION_USER_AGENT,
         // Set the storage state here if you have only one user to login.
         // storageState: STORAGE_STATE_LOGIN,

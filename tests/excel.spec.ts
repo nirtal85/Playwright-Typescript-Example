@@ -9,13 +9,13 @@ data.forEach((record) => {
   test(`Login test for ${record.description}`, async ({ page }) => {
     await page.goto('https://www.saucedemo.com/');
     if (record.user) {
-      await page.fill('input[data-test="username"]', record.user);
+      await page.getByTestId('username').fill(record.user);
     }
     if (record.password) {
-      await page.fill('input[data-test="password"]', record.password);
+      await page.getByTestId('password').fill(record.password);
     }
-    await page.click('input[data-test="login-button"]');
-    const errorMessage = page.locator('[data-test="error"]');
+    await page.getByTestId('login-button').click();
+    const errorMessage = page.getByTestId('error');
     await expect(errorMessage).toHaveText(record.error);
   });
 });
