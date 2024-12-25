@@ -1,11 +1,13 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "schedule": ["before 4am on the first day of the month"],
-  "packageRules": [
-    {
-      "groupName": "Playwright",
-      "matchPackageNames": ["playwright", "@playwright/test", "mcr.microsoft.com/playwright"]
-    }
+  "extends": [
+    "config:recommended",
+    "group:all"
+  ],
+  "pre-commit": {
+    "enabled": true
+  },
+  "schedule": [
+    "monthly"
   ]
 }
