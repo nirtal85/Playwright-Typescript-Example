@@ -1,0 +1,2 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","1000","get started link","chromium","Sun Jan 26 17:03:04 GMT 2025","passed","Sun Jan 26 17:03:05 GMT 2025","","example.spec.ts","",""
