@@ -286,36 +286,31 @@ test.describe('Clear completed button', () => {
 });
 
 test.describe('Persistence', () => {
-  test(
-    'get started f',
-    {
-      tag: '@devRun'
-    },
-    async ({ page }) => {
+  test('should persist its data', async ({ page }) => {
     // create a new todo locator
-      const newTodo = page.getByPlaceholder('What needs to be done?');
+    const newTodo = page.getByPlaceholder('What needs to be done?');
 
-      for (const item of TODO_ITEMS.slice(0, 2)) {
-        await newTodo.fill(item);
-        await newTodo.press('Enter');
-      }
+    for (const item of TODO_ITEMS.slice(0, 2)) {
+      await newTodo.fill(item);
+      await newTodo.press('Enter');
+    }
 
-      const todoItems = page.getByTestId('todo-item');
-      const firstTodoCheck = todoItems.nth(0).getByRole('checkbox');
-      await firstTodoCheck.check();
-      await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
-      await expect(firstTodoCheck).toBeChecked();
-      await expect(todoItems).toHaveClass(['completed', '']);
+    const todoItems = page.getByTestId('todo-item');
+    const firstTodoCheck = todoItems.nth(0).getByRole('checkbox');
+    await firstTodoCheck.check();
+    await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
+    await expect(firstTodoCheck).toBeChecked();
+    await expect(todoItems).toHaveClass(['completed', '']);
 
-      // Ensure there is 1 completed item.
-      await checkNumberOfCompletedTodosInLocalStorage(page, 1);
+    // Ensure there is 1 completed item.
+    await checkNumberOfCompletedTodosInLocalStorage(page, 1);
 
-      // Now reload.
-      await page.reload();
-      await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
-      await expect(firstTodoCheck).toBeChecked();
-      await expect(todoItems).toHaveClass(['completed', '']);
-    });
+    // Now reload.
+    await page.reload();
+    await expect(todoItems).toHaveText([TODO_ITEMS[0], TODO_ITEMS[1]]);
+    await expect(firstTodoCheck).toBeChecked();
+    await expect(todoItems).toHaveClass(['completed', '']);
+  });
 });
 
 test.describe('Routing', () => {
