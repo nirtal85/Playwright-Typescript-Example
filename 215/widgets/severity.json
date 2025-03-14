@@ -1,0 +1,1 @@
+[{"uid":"57e3c9270a749fa1","name":"get started link","time":{"start":1741963833295,"stop":1741963834554,"duration":1259},"status":"passed","severity":"blocker"},{"uid":"b2ce541971c2f62f","name":"get started f","time":{"start":1741963802059,"stop":1741963832270,"duration":30211},"status":"broken","severity":"normal"}]
