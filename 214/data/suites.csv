@@ -1,0 +1,3 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","30205","get started f","chromium","Fri Mar 14 14:42:39 GMT 2025","broken","Fri Mar 14 14:43:09 GMT 2025","Persistence","demo-todo-app.spec.ts","",""
+"","1160","get started link","chromium","Fri Mar 14 14:43:10 GMT 2025","passed","Fri Mar 14 14:43:11 GMT 2025","","example.spec.ts","",""
