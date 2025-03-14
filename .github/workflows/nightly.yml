@@ -74,6 +74,5 @@ jobs:
         uses: Valiantsin2021/allure-shard-results-publish@1.0.6
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          results-pattern: 'artifacts/test-results-*/allure-results'
-          report-title: 'Nightly Regression Test Report'
+          results-pattern: 'test-results-*/allure-results'
           add-env: 'true'
