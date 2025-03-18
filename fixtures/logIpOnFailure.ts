@@ -7,8 +7,7 @@ export const test = base.extend<{ logIpOnFailure: void }>({
       if (testInfo.status !== testInfo.expectedStatus) {
         const response = await request.get('https://checkip.amazonaws.com');
         const ip = await response.text();
-
-        testInfo.attach(
+        await testInfo.attach(
           'IP Address',
           { body: ip.trim(), contentType: 'text/plain' }
         );
