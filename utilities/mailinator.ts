@@ -1,5 +1,4 @@
-import { GetInboxRequest, GetMessageRequest, MailinatorClient } from 'mailinator-client';
-import { GetLinksRequest } from 'mailinator-client/lib/message/GetLinksRequest';
+import { GetInboxRequest, GetMessageLinksRequest, GetMessageRequest, MailinatorClient } from 'mailinator-client';
 
 const client = new MailinatorClient(process.env.MAILINATOR_API_TOKEN);
 const domain = process.env.MAILINATOR_DOMAIN || 'public';
@@ -60,10 +59,9 @@ export async function getEmailBody(inbox: string, messageId: string): Promise<st
  * @param messageId The message ID.
  */
 export async function getLinksFromEmail(
-  inbox: string,
   messageId: string
 ): Promise<string[]> {
-  const linksRequest = new GetLinksRequest(domain, inbox, messageId);
+  const linksRequest = new GetMessageLinksRequest(domain, messageId);
   const linksResponse = await client.request(linksRequest);
   return linksResponse.result?.links ?? [];
 }
