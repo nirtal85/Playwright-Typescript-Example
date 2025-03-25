@@ -11,11 +11,9 @@ test.describe('Mailinator Email Tests', () => {
   test('Verify email count in user inbox', async () => {
     const messages = await getInboxMessages(inbox);
     const subjectCounts: Record<string, number> = {};
-
     for (const msg of messages) {
       subjectCounts[msg.subject] = (subjectCounts[msg.subject] || 0) + 1;
     }
-
     expect(subjectCounts).toEqual({
       'some subject': 1
     });
@@ -28,7 +26,7 @@ test.describe('Mailinator Email Tests', () => {
   });
 
   test('Get OTP code from email', async () => {
-    const otpCode = await waitForOtp(inbox, 'Verify your email');
+    const otpCode = await waitForOtp(inbox, 'Verify Your email address');
     expect(/^\d{6}$/.test(otpCode)).toBeTruthy();
   });
 });
