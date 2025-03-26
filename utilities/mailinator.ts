@@ -44,18 +44,15 @@ export async function waitForMessageBySubject(
 
 /**
  * Fetch the raw HTML/text body of a specific message.
- * @param inbox Inbox name.
  * @param messageId The message ID.
  */
-export async function getEmailBody(inbox: string, messageId: string): Promise<string> {
-  const messageRequest = new GetMessageRequest(domain, inbox, messageId);
-  const message = await client.request(messageRequest);
+export async function getEmailBody(messageId: string): Promise<string> {
+  const message = await client.request(new GetMessageRequest(domain, messageId));
   return message.result?.parts?.[0]?.body || '';
 }
 
 /**
  * Fetch all links extracted from a message.
- * @param inbox Inbox name.
  * @param messageId The message ID.
  */
 export async function getLinksFromEmail(
@@ -109,6 +106,6 @@ export function extractLinkBySurroundingText(body: string, surroundingText: stri
  */
 export async function waitForOtp(inbox: string, subject: string): Promise<string> {
   const message = await waitForMessageBySubject(inbox, subject);
-  const body = await getEmailBody(inbox, message.id);
+  const body = await getEmailBody(message.id);
   return extractOtp(body);
 }
