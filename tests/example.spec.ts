@@ -1,4 +1,4 @@
-import { test } from '../fixtures/pageFixtures';
+import { test } from '../fixtures/projectFixtures';
 import { Constants } from '../utilities/constants';
 import { expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
