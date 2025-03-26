@@ -33,7 +33,7 @@ export async function waitForMessageBySubject(
     const messages = await getInboxMessages(inbox);
     const matching = messages
       .filter(msg => msg.subject === subject)
-      .sort((a, b) => b.secondsAgo - a.secondsAgo); // latest first
+      .sort((a, b) => b.secondsAgo - a.secondsAgo);
     if (matching.length > index) {
       return matching[index];
     }
