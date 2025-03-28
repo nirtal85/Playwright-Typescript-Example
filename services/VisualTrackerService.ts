@@ -9,18 +9,12 @@ import { type IgnoreArea } from '@visual-regression-tracker/sdk-js';
  * Options used to configure a visual regression tracking action.
  */
 interface TrackOptions {
-  /** Optional custom baseline name. Defaults to "Default baseline" */
-  baselineName?: string;
-
   /** A list of elements to be ignored in the screenshot comparison */
   ignoreElements?: ElementHandle[];
-
   /** Visual difference tolerance as a percentage (0–100) */
   diffTolerancePercent?: number;
-
   /** Optional comment to include with the test run */
   comment?: string;
-
   /** Whether to capture the full page. Defaults to true */
   fullPage?: boolean;
 }
@@ -62,7 +56,6 @@ export class VisualTrackerService {
    * @param page The Playwright page object to capture.
    * @param baseLineName The name to use for the baseline image.
    * @param options Optional tracking options:
-   *  - baselineName: Custom name for the baseline image.
    *  - ignoreElements: Elements to ignore during comparison.
    *  - diffTolerancePercent: Allowed visual difference threshold.
    *  - comment: A comment for the test run.
@@ -76,8 +69,7 @@ export class VisualTrackerService {
       fullPage = true
     } = options;
 
-    const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(ignoreElements);
-
+    const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(page, ignoreElements);
     await this.vrt.trackPage(
       page,
       baseLineName,
@@ -93,6 +85,7 @@ export class VisualTrackerService {
   /**
    * Tracks a screenshot of a specific element for visual comparison.
    *
+   * @param page The Playwright page object to capture.
    * @param elementHandle The Playwright ElementHandle to capture.
    * @param baseLineName The name to use for the baseline image.
    * @param options Optional tracking options:
@@ -100,15 +93,13 @@ export class VisualTrackerService {
    *  - diffTolerancePercent: Allowed visual difference threshold.
    *  - comment: A comment for the test run.
    */
-  async trackElement(elementHandle: ElementHandle, baseLineName: string, options: TrackOptions = {}) {
+  async trackElement(page: Page, elementHandle: ElementHandle, baseLineName: string, options: TrackOptions = {}) {
     const {
       ignoreElements = [],
       diffTolerancePercent = Constants.DIFF_TOLERANCE_PERCENT,
       comment
     } = options;
-
-    const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(ignoreElements);
-
+    const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(page, ignoreElements);
     await this.vrt.trackElementHandle(
       elementHandle,
       baseLineName,
@@ -122,14 +113,18 @@ export class VisualTrackerService {
 
   /**
    * Converts a list of ElementHandles into VRT-compatible ignore areas (bounding boxes).
+   * Includes all <input> elements on the page by default, even if not explicitly passed in.
    *
-   * @param elements A list of elements to ignore.
+   * @param page The Playwright page object.
+   * @param elements A list of elements to additionally ignore.
    * @returns A list of ignore area objects for the VRT API.
    */
-  private async getIgnoreAreas(elements: ElementHandle[]): Promise<IgnoreArea[]> {
+  private async getIgnoreAreas(page: Page, elements: ElementHandle[] = []): Promise<IgnoreArea[]> {
+    const inputElements = await page.$$('input');
+    const allElements = [...elements, ...inputElements];
     return Promise.all(
-      elements.map(async (el) => {
-        const box = await el.boundingBox();
+      allElements.map(async (elementHandle) => {
+        const box = await elementHandle.boundingBox();
         if (!box) return null;
         return {
           x: Math.floor(box.x),
