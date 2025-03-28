@@ -23,6 +23,7 @@
     "typescript": "5.8.2"
   },
   "dependencies": {
+    "@visual-regression-tracker/agent-playwright": "5.3.1",
     "allure-playwright": "3.2.0",
     "dotenv": "16.4.7",
     "eslint-plugin-import": "2.31.0",

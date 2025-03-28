@@ -1,10 +1,12 @@
 import { test as base } from './logIpOnFailure';
 import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
+import { VisualTrackerService } from '../services/VisualTrackerService';
 
 interface Fixtures {
   homePage: HomePage;
   mailinatorService: MailinatorService;
+  visualTracker: VisualTrackerService;
 }
 
 export const test = base.extend<Fixtures>({
@@ -17,5 +19,11 @@ export const test = base.extend<Fixtures>({
       process.env.MAILINATOR_DOMAIN
     );
     await use(mailService);
+  },
+  visualTracker: async ({}, use) => {
+    const tracker = new VisualTrackerService();
+    await tracker.start();
+    await use(tracker);
+    await tracker.stop();
   }
 });
