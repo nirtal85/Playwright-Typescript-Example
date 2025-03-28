@@ -2,7 +2,7 @@ import { Constants } from '../utilities/constants';
 import {
   PlaywrightVisualRegressionTracker
 } from '@visual-regression-tracker/agent-playwright';
-import { type Page, type ElementHandle, chromium } from '@playwright/test';
+import { type Page, type ElementHandle, chromium, test } from '@playwright/test';
 import { type IgnoreArea } from '@visual-regression-tracker/sdk-js';
 
 /**
@@ -23,6 +23,9 @@ interface TrackOptions {
  * A service class that wraps the Visual Regression Tracker Playwright agent
  * and provides utility methods for tracking pages and elements with
  * advanced options like ignore areas and diff tolerance.
+ *
+ * By default, all <input> elements on the page are ignored during visual comparison
+ * to avoid prefilled values affecting the results.
  */
 export class VisualTrackerService {
   private vrt: PlaywrightVisualRegressionTracker;
@@ -54,14 +57,16 @@ export class VisualTrackerService {
    * Tracks a screenshot of the full page or current viewport for visual comparison.
    *
    * @param page The Playwright page object to capture.
-   * @param baseLineName The name to use for the baseline image.
+   * @param baseLineName Optional name to use for the baseline image.
+   * If omitted, the test title is used.
    * @param options Optional tracking options:
    *  - ignoreElements: Elements to ignore during comparison.
    *  - diffTolerancePercent: Allowed visual difference threshold.
    *  - comment: A comment for the test run.
-   *  - fullPage: Whether to capture the full page. Defaults to true.
+   *  - fullPage: Whether to capture the full page.
+   *  Defaults to true.
    */
-  async trackPage(page: Page, baseLineName: string, options: TrackOptions = {}) {
+  async trackPage(page: Page, baseLineName?: string, options: TrackOptions = {}) {
     const {
       ignoreElements = [],
       diffTolerancePercent = Constants.DIFF_TOLERANCE_PERCENT,
@@ -69,10 +74,11 @@ export class VisualTrackerService {
       fullPage = true
     } = options;
 
+    const name = baseLineName ?? test.info().title;
     const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(page, ignoreElements);
     await this.vrt.trackPage(
       page,
-      baseLineName,
+      name,
       {
         diffTollerancePercent: diffTolerancePercent,
         ignoreAreas,
@@ -87,22 +93,23 @@ export class VisualTrackerService {
    *
    * @param page The Playwright page object to capture.
    * @param elementHandle The Playwright ElementHandle to capture.
-   * @param baseLineName The name to use for the baseline image.
+   * @param baseLineName Optional name to use for the baseline image. If omitted, the test title is used.
    * @param options Optional tracking options:
    *  - ignoreElements: Additional elements to ignore.
    *  - diffTolerancePercent: Allowed visual difference threshold.
    *  - comment: A comment for the test run.
    */
-  async trackElement(page: Page, elementHandle: ElementHandle, baseLineName: string, options: TrackOptions = {}) {
+  async trackElement(page: Page, elementHandle: ElementHandle, baseLineName?: string, options: TrackOptions = {}) {
     const {
       ignoreElements = [],
       diffTolerancePercent = Constants.DIFF_TOLERANCE_PERCENT,
       comment
     } = options;
+    const name = baseLineName ?? test.info().title;
     const ignoreAreas: IgnoreArea[] = await this.getIgnoreAreas(page, ignoreElements);
     await this.vrt.trackElementHandle(
       elementHandle,
-      baseLineName,
+      name,
       {
         diffTollerancePercent: diffTolerancePercent,
         ignoreAreas,
