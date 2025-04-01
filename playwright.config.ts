@@ -58,8 +58,6 @@ export default defineConfig({
     trace: 'retain-on-failure',
     video: 'retain-on-failure'
   },
-
-  /* Configure projects for major browsers */
   projects: [
     {
       name: 'chromium',
@@ -67,10 +65,22 @@ export default defineConfig({
         viewport: null,
         testIdAttribute: 'data-test',
         userAgent: Constants.AUTOMATION_USER_AGENT,
-        // Set the storage state here if you have only one user to login.
-        // storageState: STORAGE_STATE_LOGIN,
+        permissions: ['geolocation', 'microphone', 'camera'],
         launchOptions: {
-          args: ['--disable-web-security', '--start-maximized'],
+          args: [
+            '--start-maximized',
+            '--allow-file-access-from-files',
+            '--use-fake-device-for-media-stream',
+            '--use-fake-ui-for-media-stream',
+            '--hide-scrollbars',
+            '--disable-features=IsolateOrigins,site-per-process,VizDisplayCompositor,SidePanelPinning,OptimizationGuideModelDownloading,OptimizationHintsFetching,OptimizationTargetPrediction,OptimizationHints',
+            '--disable-popup-blocking',
+            '--disable-search-engine-choice-screen',
+            '--disable-infobars',
+            '--disable-dev-shm-usage',
+            '--disable-notifications',
+            '--disable-blink-features=AutomationControlled'
+          ],
           headless: false
         }
       }
