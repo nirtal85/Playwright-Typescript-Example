@@ -41,3 +41,19 @@ export const test = base.extend<Fixtures & { logIpOnFailure: void }>({
     await tracker.stop();
   }
 });
+
+test.beforeEach(async ({ page }, testInfo) => {
+  if (testInfo.title.includes('@unblock')) {
+    return;
+  }
+  const client = await page.context().newCDPSession(page);
+  await client.send('Network.enable');
+  await client.send('Network.setBlockedURLs', {
+    urls: [
+      'https://analytics.dev.example.com/*',
+      'https://tracking.staging.example.com/*',
+      'https://thirdparty.production.example.com/*',
+      'https://cdn.privacy-banner.com/*'
+    ]
+  });
+});
