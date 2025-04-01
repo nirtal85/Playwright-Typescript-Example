@@ -43,7 +43,7 @@ export const test = base.extend<Fixtures & { logIpOnFailure: void }>({
 });
 
 test.beforeEach(async ({ page }, testInfo) => {
-  if (testInfo.title.includes('@unblock')) {
+  if (testInfo.tags.includes('@unblock')) {
     return;
   }
   const client = await page.context().newCDPSession(page);
