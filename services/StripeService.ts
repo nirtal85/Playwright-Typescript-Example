@@ -1,4 +1,4 @@
-import { PaymentMethod, CardType } from '../entities/PaymentMethod';
+import { PaymentMethod, type CardType } from '../entities/PaymentMethod';
 import Stripe from 'stripe';
 import { expect } from '@playwright/test';
 
@@ -115,7 +115,7 @@ export class StripeService {
     if (!customerId) {
       throw new Error('Customer ID is required');
     }
-    const token = PaymentMethod.getToken(cardType);
+    const token = PaymentMethod.getCreditCard(cardType).token;
     const newPaymentMethod = await this.stripe.paymentMethods.create({
       type: 'card',
       card: {
@@ -168,7 +168,7 @@ export class StripeService {
       throw new Error('Customer ID is required');
     }
 
-    const token = PaymentMethod.getToken(cardType);
+    const token = PaymentMethod.getCreditCard(cardType).token;
     const newPaymentMethod = await this.stripe.paymentMethods.create({
       type: 'card',
       card: {
