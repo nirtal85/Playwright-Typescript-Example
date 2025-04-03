@@ -23,11 +23,13 @@
     "typescript": "5.8.2"
   },
   "dependencies": {
+    "@types/stripe": "8.0.416",
     "@visual-regression-tracker/agent-playwright": "5.3.1",
     "allure-playwright": "3.2.1",
     "dotenv": "16.4.7",
     "eslint-plugin-import": "2.31.0",
     "mailinator-client": "1.0.5",
+    "stripe": "18.0.0",
     "xlsx": "0.18.5"
   },
   "lint-staged": {
