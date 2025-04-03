@@ -1,12 +1,14 @@
 import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
+import { StripeService } from '../services/StripeService';
 import { type CDPSession, test as base } from '@playwright/test';
 
 interface Fixtures {
   homePage: HomePage;
   mailinatorService: MailinatorService;
   visualTracker: VisualTrackerService;
+  stripeService: StripeService;
 }
 
 export const test = base.extend<
@@ -57,6 +59,10 @@ export const test = base.extend<
     await tracker.start();
     await use(tracker);
     await tracker.stop();
+  },
+  stripeService: async ({}, use) => {
+    const stripeService = new StripeService(process.env.STRIPE_SECRET_KEY!);
+    await use(stripeService);
   }
 });
 
