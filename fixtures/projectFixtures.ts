@@ -13,17 +13,20 @@ interface Fixtures {
 }
 
 export const test = base.extend<Fixtures>({
-  requestBlocker: async ({ page }, use) => {
-    const blockedURLs = [
-      'https://analytics.dev.example.com/',
-      'https://tracking.staging.example.com/',
-      'https://thirdparty.production.example.com/',
-      'https://cdn.privacy-banner.com/'
-    ];
-    const blocker = new RequestBlockerService(page, blockedURLs);
-    await blocker.enable();
-    await use(blocker);
-  },
+  requestBlocker: [
+    async ({ page }, use) => {
+      const blockedURLs = [
+        'https://analytics.dev.example.com/',
+        'https://tracking.staging.example.com/',
+        'https://thirdparty.production.example.com/',
+        'https://cdn.privacy-banner.com/'
+      ];
+      const blocker = new RequestBlockerService(page, blockedURLs);
+      await blocker.enable();
+      await use(blocker);
+    },
+    { auto: true }
+  ],
   logIpOnFailure: [
     async ({ request }, use, testInfo) => {
       await use();
