@@ -1,32 +1,28 @@
 import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
-import { type CDPSession, test as base } from '@playwright/test';
+import { RequestBlockerService } from '../services/RequestBlockerService';
+import { test as base } from '@playwright/test';
 
 interface Fixtures {
   homePage: HomePage;
   mailinatorService: MailinatorService;
   visualTracker: VisualTrackerService;
+  requestBlocker: RequestBlockerService;
+  logIpOnFailure: void;
 }
 
-export const test = base.extend<
-  Fixtures & {
-    logIpOnFailure: void;
-    cdp: CDPSession;
-  }
->({
-  cdp: async ({ page }, use) => {
-    const client = await page.context().newCDPSession(page);
-    await client.send('Network.enable');
-    await client.send('Network.setBlockedURLs', {
-      urls: [
-        'https://analytics.dev.example.com/*',
-        'https://tracking.staging.example.com/*',
-        'https://thirdparty.production.example.com/*',
-        'https://cdn.privacy-banner.com/*'
-      ]
-    });
-    await use(client);
+export const test = base.extend<Fixtures>({
+  requestBlocker: async ({ page }, use) => {
+    const blockedURLs = [
+      'https://analytics.dev.example.com/',
+      'https://tracking.staging.example.com/',
+      'https://thirdparty.production.example.com/',
+      'https://cdn.privacy-banner.com/'
+    ];
+    const blocker = new RequestBlockerService(page, blockedURLs);
+    await blocker.enable();
+    await use(blocker);
   },
   logIpOnFailure: [
     async ({ request }, use, testInfo) => {
@@ -57,11 +53,5 @@ export const test = base.extend<
     await tracker.start();
     await use(tracker);
     await tracker.stop();
-  }
-});
-
-test.beforeEach(async ({ cdp }, testInfo) => {
-  if (testInfo.tags.includes('@unblock')) {
-    await cdp.send('Network.setBlockedURLs', { urls: [] });
   }
 });

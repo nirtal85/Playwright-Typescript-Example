@@ -46,9 +46,6 @@ export default [
         'error',
         { groups: ['index', 'sibling', 'parent', 'internal', 'external', 'builtin'] },
       ],
-      '@typescript-eslint/explicit-function-return-type': 'off',
-      '@typescript-eslint/no-explicit-any': 'off',
-      '@typescript-eslint/no-non-null-assertion': 'off',
     },
     ignores: [
       'node_modules/',
