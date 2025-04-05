@@ -1,6 +1,7 @@
 import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
+import { DatabaseService } from '../services/DatabaseService';
 import { StripeService } from '../services/StripeService';
 import { type CDPSession, test as base } from '@playwright/test';
 
@@ -8,6 +9,7 @@ interface Fixtures {
   homePage: HomePage;
   mailinatorService: MailinatorService;
   visualTracker: VisualTrackerService;
+  databaseService: DatabaseService;
   stripeService: StripeService;
 }
 
@@ -60,6 +62,11 @@ export const test = base.extend<
     await use(tracker);
     await tracker.stop();
   },
+  databaseService: [async ({}, use) => {
+    const dbService = new DatabaseService();
+    await use(dbService);
+    await dbService.closePool();
+  }, { scope: 'test' }],
   stripeService: async ({}, use) => {
     const stripeService = new StripeService(process.env.STRIPE_SECRET_KEY!);
     await use(stripeService);
