@@ -67,6 +67,7 @@ export default defineConfig({
         userAgent: Constants.AUTOMATION_USER_AGENT,
         permissions: ['geolocation', 'microphone', 'camera'],
         launchOptions: {
+          timeout: 0,
           args: [
             '--start-maximized',
             '--allow-file-access-from-files',
