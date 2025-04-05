@@ -1,12 +1,14 @@
 import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
+import { DatabaseService } from '../services/DatabaseService';
 import { type CDPSession, test as base } from '@playwright/test';
 
 interface Fixtures {
   homePage: HomePage;
   mailinatorService: MailinatorService;
   visualTracker: VisualTrackerService;
+  databaseService: DatabaseService;
 }
 
 export const test = base.extend<
@@ -57,6 +59,11 @@ export const test = base.extend<
     await tracker.start();
     await use(tracker);
     await tracker.stop();
+  },
+  databaseService: async ({}, use) => {
+    const dbService = new DatabaseService();
+    await use(dbService);
+    await dbService.closePool();
   }
 });
 
