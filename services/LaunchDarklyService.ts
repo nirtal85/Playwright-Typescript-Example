@@ -1,4 +1,3 @@
-import { FeatureFlagValue } from '../enums/featureFlags';
 import { test } from '@playwright/test'; // Import test for test.skip
 
 /**
@@ -71,29 +70,25 @@ export class LaunchDarklyService {
    * if the status doesn't match the expected value.
    * Must be called early within a Playwright test function.
    *
+   * Use FeatureFlags constants when calling this method.
    * @param {string} flagKey The key of the feature flag to check.
    * @param {boolean} expectedStatus The desired boolean status (true for enabled, false for disabled).
    * @param {string} [environmentKey='test'] Optional: The specific environment key to check.
    * @throws {Error} If the underlying API call to LaunchDarkly fails (e.g., network error, invalid token).
    */
   async skipTestUnlessFlagStatusIs(
-    flagKey: FeatureFlagValue, // Use the specific type here for clarity
+    flagKey: string,
     expectedStatus: boolean,
     environmentKey: string = 'test'
   ): Promise<void> {
     let actualStatus: boolean;
     try {
-      // Use the existing method to get the status
       actualStatus = await this.getFlagStatus(flagKey, environmentKey);
     } catch (error: any) {
-      // Re-throw the error - skipping due to API failure can hide problems
       throw new Error(`Failed to get LaunchDarkly flag status for '${flagKey}' in environment '${environmentKey}': ${error.message}`);
     }
-
     const shouldSkip = actualStatus !== expectedStatus;
     const skipMessage = `Skipping test because flag '${flagKey}' in environment '${environmentKey}' is ${actualStatus}, but expected ${expectedStatus}.`;
-
-    // Use Playwright's test.skip directly within the service method
     test.skip(shouldSkip, skipMessage);
   }
 }
