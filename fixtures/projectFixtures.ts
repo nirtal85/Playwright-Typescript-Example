@@ -3,6 +3,7 @@ import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
 import { DatabaseService } from '../services/DatabaseService';
 import { StripeService } from '../services/StripeService';
+import { LaunchDarklyService } from '../services/LaunchDarklyService';
 import { type CDPSession, test as base } from '@playwright/test';
 
 interface Fixtures {
@@ -11,6 +12,7 @@ interface Fixtures {
   visualTracker: VisualTrackerService;
   databaseService: DatabaseService;
   stripeService: StripeService;
+  launchDarklyService: LaunchDarklyService;
 }
 
 export const test = base.extend<
@@ -70,6 +72,10 @@ export const test = base.extend<
   stripeService: async ({}, use) => {
     const stripeService = new StripeService(process.env.STRIPE_SECRET_KEY!);
     await use(stripeService);
+  },
+  launchDarklyService: async ({}, use) => {
+    const ldService = new LaunchDarklyService();
+    await use(ldService);
   }
 });
 
