@@ -1,4 +1,4 @@
-import { PaymentMethod, type CardType } from '../entities/PaymentMethod';
+import { PaymentMethod, type CardType } from './PaymentMethod';
 import Stripe from 'stripe';
 import { expect } from '@playwright/test';
 
