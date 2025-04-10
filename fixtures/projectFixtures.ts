@@ -2,8 +2,8 @@ import { HomePage } from '../pages/HomePage';
 import { MailinatorService } from '../services/MailinatorService';
 import { VisualTrackerService } from '../services/VisualTrackerService';
 import { DatabaseService } from '../services/DatabaseService';
-import { StripeService } from '../services/StripeService';
-import { LaunchDarklyService } from '../services/LaunchDarklyService';
+import { StripeService } from '../services/stripe/StripeService';
+import { LaunchDarklyService } from '../services/launchDarkly/LaunchDarklyService';
 import { type CDPSession, test as base } from '@playwright/test';
 
 interface Fixtures {
