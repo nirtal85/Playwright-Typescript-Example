@@ -2,7 +2,6 @@ import { test } from '../fixtures/projectFixtures';
 import { Constants } from '../utilities/constants';
 import { expect } from '@playwright/test';
 import * as allure from 'allure-js-commons';
-import { Severity } from 'allure-js-commons';
 import path from 'path';
 import { readFileSync } from 'fs';
 
@@ -21,7 +20,7 @@ test(
     tag: '@devRun'
   },
   async ({ page, homePage }, testInfo) => {
-    await allure.severity(Severity.BLOCKER);
+    await allure.severity(allure.Severity.BLOCKER);
     await allure.link('docs', 'Related Documentation');
     await allure.issue('issues/AUTH-123', 'Related Issue');
     await allure.tms('tms/TMS-456', 'Related Test Case');
