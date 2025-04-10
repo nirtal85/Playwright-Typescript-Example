@@ -1,4 +1,4 @@
-import { type Locator, type Page } from '@playwright/test';
+import { type Locator, type Page, test } from '@playwright/test';
 
 export class HomePage {
   readonly page: Page;
@@ -10,6 +10,8 @@ export class HomePage {
   }
 
   async clickGetStarted() {
-    await this.getStartedLink.click();
+    await test.step('Click on Get Started link', async () => {
+      await this.getStartedLink.click();
+    });
   }
 }
