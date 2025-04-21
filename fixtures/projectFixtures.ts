@@ -17,7 +17,6 @@ interface Fixtures {
 
 export const test = base.extend<
   Fixtures & {
-    logIpOnFailure: void;
     cdp: CDPSession;
   }
 >({
@@ -34,20 +33,6 @@ export const test = base.extend<
     });
     await use(client);
   },
-  logIpOnFailure: [
-    async ({ request }, use, testInfo) => {
-      await use();
-      if (testInfo.status !== testInfo.expectedStatus) {
-        const response = await request.get('https://checkip.amazonaws.com');
-        const ip = await response.text();
-        await testInfo.attach('IP Address', {
-          body: ip.trim(),
-          contentType: 'text/plain'
-        });
-      }
-    },
-    { auto: true }
-  ],
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
@@ -82,5 +67,16 @@ export const test = base.extend<
 test.beforeEach(async ({ cdp }, testInfo) => {
   if (testInfo.tags.includes('@unblock')) {
     await cdp.send('Network.setBlockedURLs', { urls: [] });
+  }
+});
+
+test.afterEach(async ({ request }, testInfo) => {
+  if (testInfo.status !== testInfo.expectedStatus) {
+    const response = await request.get('https://checkip.amazonaws.com');
+    const ip = await response.text();
+    await testInfo.attach('IP Address on Failure', {
+      body: ip.trim(),
+      contentType: 'text/plain'
+    });
   }
 });
