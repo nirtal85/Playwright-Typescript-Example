@@ -1,4 +1,5 @@
-import { type Locator, type Page, test } from '@playwright/test';
+import { type Locator, type Page } from '@playwright/test';
+import { step } from 'allure-decorators';
 
 export class HomePage {
   readonly page: Page;
@@ -9,9 +10,8 @@ export class HomePage {
     this.getStartedLink = page.getByRole('link', { name: 'Get started' });
   }
 
+  @step('Click on Get Started link')
   async clickGetStarted() {
-    await test.step('Click on Get Started link', async () => {
-      await this.getStartedLink.click();
-    });
+    await this.getStartedLink.click();
   }
 }
