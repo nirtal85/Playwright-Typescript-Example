@@ -10,18 +10,17 @@ const CONNECT_TIMEOUT_MS = 3 * 60 * 1000;
 
 /**
  * SFTP service for uploading and querying files.
+ * The default port is 22
  */
 export class SftpService {
   private readonly config: SftpClient.ConnectOptions;
 
   constructor() {
     const host = process.env.SFTP_HOST;
-    const port = 22;
     const username = process.env.SFTP_USER;
     const password = process.env.SFTP_PASSWORD;
     this.config = {
       host,
-      port,
       username,
       password,
       readyTimeout: CONNECT_TIMEOUT_MS
