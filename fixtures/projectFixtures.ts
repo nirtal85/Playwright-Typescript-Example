@@ -4,6 +4,7 @@ import { VisualTrackerService } from '../services/VisualTrackerService';
 import { DatabaseService } from '../services/DatabaseService';
 import { StripeService } from '../services/stripe/StripeService';
 import { LaunchDarklyService } from '../services/launchDarkly/LaunchDarklyService';
+import { SftpService } from '../services/SftpService';
 import { type CDPSession, test as base } from '@playwright/test';
 
 interface Fixtures {
@@ -13,6 +14,7 @@ interface Fixtures {
   databaseService: DatabaseService;
   stripeService: StripeService;
   launchDarklyService: LaunchDarklyService;
+  sftpService: SftpService;
 }
 
 export const test = base.extend<
@@ -61,7 +63,11 @@ export const test = base.extend<
   launchDarklyService: async ({}, use) => {
     const ldService = new LaunchDarklyService();
     await use(ldService);
-  }
+  },
+  sftpService: [async ({}, use) => {
+    const sftp = new SftpService();
+    await use(sftp);
+  }, { scope: 'test' }]
 });
 
 test.beforeEach(async ({ cdp }, testInfo) => {
