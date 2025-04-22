@@ -6,11 +6,12 @@
   "type": "module",
   "scripts": {
     "test": "playwright test",
-    "test:dev": "playwright test --grep \"@devRun\"",
-    "test:non-dev": "playwright test --grep-invert \"@devRun\"",
-    "test:debug": "PWDEBUG=1 playwright test --grep \"@devRun\"",
+    "test:dev": "playwright test --grep '@devRun'",
+    "test:non-dev": "playwright test --grep-invert '@devRun'",
+    "test:debug": "PWDEBUG=1 playwright test --grep '@devRun'",
     "install-browsers": "playwright install --with-deps",
     "report:serve": "allure serve allure-results",
+    "codegen": "playwright codegen --viewport-size='800,600' https://google.com/",
     "prepare": "husky"
   },
   "keywords": [],
