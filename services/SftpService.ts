@@ -57,32 +57,24 @@ export class SftpService {
     const localFilePath = path.join(RESOURCES_DIR, DUMMY_FILE_NAME);
     const remoteFilePath = path.posix.join(remoteDir, DUMMY_FILE_NAME);
     await this.performSftpAction(async (client) => {
-      const exists = await client.exists(remoteDir);
-      if (!exists) {
-        throw new Error(`Remote directory '${remoteDir}' does not exist.`);
-      }
       await client.put(localFilePath, remoteFilePath);
     });
   }
 
   /**
-   * Counts the number of files in the given remote directory that start with a specified prefix.
+   * Counts how many regular files in the remote directory start with `${filePrefix}-`.
+   * This excludes directories and symlinks, ensuring only files are counted.
    *
-   * @param {string} filePrefix The prefix to filter by.
-   * @param {string} [remoteDir="/remote/inbox"] The remote directory to search in.
+   * @param {string} filePrefix - The prefix (e.g., user.claimId) to match filenames.
+   * @param {string} [remoteDir="/remote/inbox"] - The remote directory to search in.
+   * @returns {Promise<number>} - The number of matching regular files.
    */
   async countFilesWithPrefix(filePrefix: string, remoteDir: string = '/remote/inbox'): Promise<number> {
-    if (!filePrefix) return 0;
     return await this.performSftpAction(async (client) => {
-      const dirExists = await client.exists(remoteDir);
-      if (!dirExists) return 0;
-      let fileList: SftpClient.FileInfo[];
-      try {
-        fileList = await client.list(remoteDir);
-      } catch (error) {
-        throw new Error(`Failed to list remote directory '${remoteDir}': ${error instanceof Error ? error.message : String(error)}`);
-      }
-      return fileList.filter(file => file.type === '-' && file.name.startsWith(filePrefix)).length;
+      const fileList = await client.list(remoteDir);
+      return fileList.filter(file =>
+        file.type === '-' && file.name.startsWith(`${filePrefix}-`)
+      ).length;
     });
   }
 }
