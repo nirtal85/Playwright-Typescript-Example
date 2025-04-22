@@ -10,3 +10,4 @@ trace.zip
 # Environments
 .env
 .idea
+*.pem
