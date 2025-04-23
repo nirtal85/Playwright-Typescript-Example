@@ -1,17 +1,5 @@
-/**
- * Enum for LaunchDarkly feature flag keys.
- * Provides both type safety and runtime access.
- */
-export enum FeatureFlags {
-  /**
-   * Example Feature Flag A.
-   * Replace with your actual flag keys.
-   */
-  EXAMPLE_FEATURE_A = 'example-feature-a'
-}
+export const FeatureFlags = {
+  EXAMPLE_FEATURE_A: 'example-feature-a'
+} as const;
 
-/**
- * Type alias for the string literal values of the feature flags.
- * Useful for type checking function parameters.
- */
-export type FeatureFlagValue = `${FeatureFlags}`;
+export type FeatureFlagValue = typeof FeatureFlags[keyof typeof FeatureFlags];

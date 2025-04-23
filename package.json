@@ -41,7 +41,8 @@
     "mailinator-client": "1.0.5",
     "mysql2": "^3.14.0",
     "stripe": "18.0.0",
-    "xlsx": "0.18.5"
+    "xlsx": "0.18.5",
+    "zod": "^3.24.3"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,yml}": [
