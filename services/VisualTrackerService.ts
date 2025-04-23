@@ -2,8 +2,9 @@ import { Constants } from '../utilities/constants';
 import {
   PlaywrightVisualRegressionTracker
 } from '@visual-regression-tracker/agent-playwright';
-import { type Page, type ElementHandle, chromium, test } from '@playwright/test';
-import { type IgnoreArea } from '@visual-regression-tracker/sdk-js';
+import { chromium, test } from '@playwright/test';
+import type { Page, ElementHandle } from '@playwright/test';
+import type { IgnoreArea } from '@visual-regression-tracker/sdk-js';
 
 /**
  * Options used to configure a visual regression tracking action.

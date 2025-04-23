@@ -18,6 +18,7 @@ interface Fixtures {
   launchDarklyService: LaunchDarklyService;
   sftpService: SftpService;
   secureApiService: SecureApiService;
+  networkBlockerService: NetworkBlockerService;
 }
 
 export const test = base.extend<Fixtures>({
@@ -57,18 +58,18 @@ export const test = base.extend<Fixtures>({
   secureApiService: async ({}, use) => {
     const service = new SecureApiService();
     await use(service);
-  }
-});
-
-test.beforeEach(async ({ page }) => {
-  const networkBlocker = new NetworkBlockerService(page);
-  const defaultBlockedUrls = [
-    'https://analytics.dev.example.com/*',
-    'https://tracking.staging.example.com/*',
-    'https://thirdparty.production.example.com/*',
-    'https://cdn.privacy-banner.com/*'
-  ];
-  await networkBlocker.blockUrls(defaultBlockedUrls);
+  },
+  networkBlockerService: [async ({ page }, use) => {
+    const networkBlocker = new NetworkBlockerService(page);
+    const defaultBlockedUrls = [
+      '**/analytics.dev.example.com/**',
+      '**/tracking.staging.example.com/**',
+      '**/thirdparty.production.example.com/**',
+      '**/cdn.privacy-banner.com/**'
+    ];
+    await networkBlocker.blockUrls(defaultBlockedUrls);
+    await use(networkBlocker);
+  }, { auto: true }]
 });
 
 test.afterEach(async ({ request }, testInfo) => {
