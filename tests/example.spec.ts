@@ -5,8 +5,15 @@ import * as allure from 'allure-js-commons';
 import path from 'path';
 import { readFileSync } from 'fs';
 
-test('has title', async ({ page }) => {
+test('has title', async ({ page }, testInfo) => {
   await test.step('Navigate to Playwright website', async () => {
+    await testInfo.attach(
+      'Nested HTML Attachment Example',
+      {
+        body: '<h1>Example html attachment</h1>',
+        contentType: 'text/html'
+      }
+    );
     await page.goto('https://playwright.dev/');
   });
   await test.step('Check page title', async () => {
