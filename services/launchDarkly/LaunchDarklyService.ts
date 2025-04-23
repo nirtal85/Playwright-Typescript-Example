@@ -1,22 +1,12 @@
 import { test } from '@playwright/test';
+import axios from 'axios';
+import { z } from 'zod';
 
-/**
- * Interface representing the structure of a single environment within a LaunchDarkly flag response.
- */
-interface LdFlagEnvironment {
-  /** Whether the flag is enabled ('on') for this environment. */
-  on: boolean;
-}
-
-/**
- * Interface representing the expected structure of the LaunchDarkly flag API response.
- */
-interface LdFlagResponse {
-  /** A map of environment keys to their specific flag configurations. */
-  environments: {
-    [key: string]: LdFlagEnvironment;
-  };
-}
+const LdFlagResponseSchema = z.object({
+  environments: z.record(z.string(), z.object({
+    on: z.boolean()
+  }))
+});
 
 /**
  * Service class for interacting with the LaunchDarkly REST API.
@@ -40,28 +30,23 @@ export class LaunchDarklyService {
 
   /**
    * Fetches the boolean status ('on') of a specific feature flag for a given environment from the LaunchDarkly API.
+   * Validates the API response structure using Zod.
    *
    * Use FeatureFlags constants when calling this method.
-   * @param {string} flagKey The unique key of the feature flag (e.g., 'my-new-feature'). Should be a value from FeatureFlags.
-   * @param {string} [environmentKey='test'] The key of the target environment (e.g., 'test', 'production').
-   * @returns {Promise<boolean>} A promise that resolves to `true` if the flag is 'on' for the environment,
-   *                            `false` otherwise (including if the flag or environment key is not found in the response).
-   * @throws {Error} If the API request fails (e.g., network error, invalid token, non-2xx response).
+   * @param {string} flagKey The unique key of the feature flag.
+   * @param {string} [environmentKey='test'] The key of the target environment.
+   * @returns {Promise<boolean>} A promise that resolves to `true` if the flag is 'on', `false` otherwise.
    */
   async getFlagStatus(flagKey: string, environmentKey: string = 'test'): Promise<boolean> {
     const apiUrl = `${this.baseUrl}/flags/default/${flagKey}`;
-    const response = await fetch(apiUrl, {
-      method: 'GET',
+    const response = await axios.get(apiUrl, {
       headers: {
         'Authorization': this.ldToken,
         'Content-Type': 'application/json'
       }
     });
-    if (!response.ok) {
-      throw new Error(`LaunchDarkly API request failed for flag '${flagKey}': ${response.status} ${response.statusText}`);
-    }
-    const data: LdFlagResponse = await response.json();
-    const environmentData = data.environments?.[environmentKey];
+    const parsedData = LdFlagResponseSchema.parse(response.data);
+    const environmentData = parsedData.environments[environmentKey];
     return environmentData?.on ?? false;
   }
 
@@ -74,7 +59,7 @@ export class LaunchDarklyService {
    * @param {string} flagKey The key of the feature flag to check.
    * @param {boolean} expectedStatus The desired boolean status (true for enabled, false for disabled).
    * @param {string} [environmentKey='test'] Optional: The specific environment key to check.
-   * @throws {Error} If the underlying API call to LaunchDarkly fails (e.g., network error, invalid token).
+   * @throws {Error} If the underlying API call or validation fails.
    */
   async skipTestUnlessFlagStatusIs(
     flagKey: string,
