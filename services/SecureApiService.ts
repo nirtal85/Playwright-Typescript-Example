@@ -1,4 +1,5 @@
-import axios, { AxiosInstance, AxiosRequestConfig, CreateAxiosDefaults, AxiosResponse } from 'axios';
+import axios from 'axios';
+import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
 import { readFileSync } from 'fs';
 import { Agent } from 'https';
 import path from 'path';
@@ -25,14 +26,15 @@ export class SecureApiService {
       key,
       rejectUnauthorized: true
     });
-    this.axiosInstance = axios.create({
+    const config: AxiosRequestConfig = {
       httpsAgent,
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${process.env.BEARER}`
       }
-    } as CreateAxiosDefaults);
+    };
+    this.axiosInstance = axios.create(config);
     this.axiosInstance.interceptors.response.use(
       (res: AxiosResponse) => res,
       (err: any) => {
@@ -43,10 +45,9 @@ export class SecureApiService {
 
   /**
    * Sends a secure POST request with client certificate authentication.
-   *
-   * @param url Full URL to the endpoint (e.g., 'https://api.example.com/v1/resource')
-   * @param payload Request body data
-   * @param config Optional Axios request configuration
+   @param url Full URL to the endpoint (e.g., 'https://api.example.com/v1/resource')
+   @param payload Request body data
+   @param config Optional Axios request configuration
    */
   async post<T = any>(
     url: string,
