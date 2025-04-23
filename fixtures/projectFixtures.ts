@@ -6,7 +6,8 @@ import { StripeService } from '../services/stripe/StripeService';
 import { LaunchDarklyService } from '../services/launchDarkly/LaunchDarklyService';
 import { SftpService } from '../services/SftpService';
 import { SecureApiService } from '../services/SecureApiService';
-import { type CDPSession, test as base } from '@playwright/test';
+import { NetworkBlockerService } from '../services/NetworkBlockerService';
+import { test as base } from '@playwright/test';
 
 interface Fixtures {
   homePage: HomePage;
@@ -19,24 +20,7 @@ interface Fixtures {
   secureApiService: SecureApiService;
 }
 
-export const test = base.extend<
-  Fixtures & {
-    cdp: CDPSession;
-  }
->({
-  cdp: async ({ page }, use) => {
-    const client = await page.context().newCDPSession(page);
-    await client.send('Network.enable');
-    await client.send('Network.setBlockedURLs', {
-      urls: [
-        'https://analytics.dev.example.com/*',
-        'https://tracking.staging.example.com/*',
-        'https://thirdparty.production.example.com/*',
-        'https://cdn.privacy-banner.com/*'
-      ]
-    });
-    await use(client);
-  },
+export const test = base.extend<Fixtures>({
   homePage: async ({ page }, use) => {
     await use(new HomePage(page));
   },
@@ -76,10 +60,15 @@ export const test = base.extend<
   }
 });
 
-test.beforeEach(async ({ cdp }, testInfo) => {
-  if (testInfo.tags.includes('@unblock')) {
-    await cdp.send('Network.setBlockedURLs', { urls: [] });
-  }
+test.beforeEach(async ({ page }) => {
+  const networkBlocker = new NetworkBlockerService(page);
+  const defaultBlockedUrls = [
+    'https://analytics.dev.example.com/*',
+    'https://tracking.staging.example.com/*',
+    'https://thirdparty.production.example.com/*',
+    'https://cdn.privacy-banner.com/*'
+  ];
+  await networkBlocker.blockUrls(defaultBlockedUrls);
 });
 
 test.afterEach(async ({ request }, testInfo) => {
