@@ -1,8 +1,6 @@
 import SftpClient from 'ssh2-sftp-client';
 import path from 'path';
 
-/** Default filename for testing file upload (adjust as needed) */
-const DUMMY_FILE_NAME = 'dummy-upload-file.txt';
 /** Local directory containing resources to upload */
 const RESOURCES_DIR = path.resolve(process.cwd(), 'resources');
 /** Connection timeout in milliseconds */
@@ -46,15 +44,17 @@ export class SftpService {
   }
 
   /**
-   * Uploads a local file to a specified remote directory via SFTP.
+   * Uploads a specified local file from the resources directory to a specified remote directory via SFTP.
    *
-   * @param {string} [remoteDir="/remote/upload"] The remote directory to upload to. Must already exist on the server.
+   * @param {string} localFileName The name of the file within the local 'resources' directory to upload.
+   * @param {string} [remoteDir="/outbound/upload"] The remote directory to upload the file to.
    * @returns {Promise<void>} A promise that resolves when the upload is complete.
-   * @throws Will propagate any error thrown by the SFTP client, such as if the remote directory does not exist.
+   * @throws Will propagate any error thrown by the SFTP client
+   * (e.g., connection issues, file not found locally, permissions).
    */
-  async uploadFile(remoteDir: string = '/remote/upload'): Promise<void> {
-    const localFilePath = path.join(RESOURCES_DIR, DUMMY_FILE_NAME);
-    const remoteFilePath = path.posix.join(remoteDir, DUMMY_FILE_NAME);
+  async uploadFile(localFileName: string, remoteDir: string = '/remote/upload'): Promise<void> {
+    const localFilePath = path.join(RESOURCES_DIR, localFileName);
+    const remoteFilePath = path.posix.join(remoteDir, localFileName);
     await this.performSftpAction(async (client) => {
       await client.put(localFilePath, remoteFilePath);
     });
