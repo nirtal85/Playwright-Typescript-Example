@@ -3,6 +3,15 @@ name: Pre merge test
 on:
   pull_request:
     branches: [main]
+    paths:
+      - '**/*.ts'
+      - '**/*.js'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tsconfig.json'
+      - 'playwright.config.ts'
+      - 'eslint.config.js'
+      - '.github/workflows/devRun.yml'
 
 jobs:
   merge_test:
