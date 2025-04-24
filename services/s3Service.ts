@@ -1,4 +1,5 @@
-import { S3Client, PutObjectCommand, PutObjectCommandOutput } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, PutObjectCommandOutput, S3ClientConfig } from '@aws-sdk/client-s3';
+import { fromIni } from '@aws-sdk/credential-provider-ini';
 import * as fs from 'fs';
 
 /**
@@ -9,12 +10,14 @@ export class S3Service {
 
   /**
      * Initializes the S3 client.
-     * Credentials will be loaded based on the standard AWS credentials chain
-     * (environment variables, shared credential file, etc.).
      * @param [region='us-east-1'] - The AWS region to connect to.
      */
   constructor(region: string = 'us-east-1') {
-    this.s3Client = new S3Client({ region });
+    const clientConfig: S3ClientConfig = {
+      region,
+      credentials: fromIni({ profile: process.env.ENVIRONMENT })
+    };
+    this.s3Client = new S3Client(clientConfig);
   }
 
   /**
