@@ -47,7 +47,7 @@ export class SftpService {
    * Uploads a specified local file from the resources directory to a specified remote directory via SFTP.
    *
    * @param {string} localFileName The name of the file within the local 'resources' directory to upload.
-   * @param {string} [remoteDir="/outbound/835"] The remote directory to upload the file to.
+   * @param {string} [remoteDir="/outbound/upload"] The remote directory to upload the file to.
    * @returns {Promise<void>} A promise that resolves when the upload is complete.
    * @throws Will propagate any error thrown by the SFTP client
    * (e.g., connection issues, file not found locally, permissions).
