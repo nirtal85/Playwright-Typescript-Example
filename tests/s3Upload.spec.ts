@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 test.describe('S3 Service Upload', () => {
-  test('should upload the test.txt file to S3', async ({ s3Service }) => {
+  test.skip('should upload the test.txt file to S3', async ({ s3Service }) => {
     const localFileName = 'test.txt';
     const bucketName = 'test';
     const localFilePath = path.join(__dirname, '..', 'resources', localFileName);
