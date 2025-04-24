@@ -7,6 +7,7 @@ import { LaunchDarklyService } from '../services/launchDarkly/LaunchDarklyServic
 import { SftpService } from '../services/SftpService';
 import { SecureApiService } from '../services/SecureApiService';
 import { NetworkBlockerService } from '../services/NetworkBlockerService';
+import { S3Service } from '../services/s3Service';
 import { test as base } from '@playwright/test';
 
 interface Fixtures {
@@ -19,6 +20,7 @@ interface Fixtures {
   sftpService: SftpService;
   secureApiService: SecureApiService;
   networkBlockerService: NetworkBlockerService;
+  s3Service: S3Service;
 }
 
 export const test = base.extend<Fixtures>({
@@ -69,7 +71,11 @@ export const test = base.extend<Fixtures>({
     ];
     await networkBlocker.blockUrls(defaultBlockedUrls);
     await use(networkBlocker);
-  }, { auto: true }]
+  }, { auto: true }],
+  s3Service: async ({}, use) => {
+    const s3 = new S3Service();
+    await use(s3);
+  }
 });
 
 test.afterEach(async ({ request }, testInfo) => {
