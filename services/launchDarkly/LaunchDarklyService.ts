@@ -15,6 +15,17 @@ const ldApi = axios.create({
 });
 
 export class LaunchDarklyService {
+  /**
+   * Returns the status of the feature flag identified by `flagKey` in the environment
+   * identified by `environmentKey`.
+   *
+   * @param flagKey The key identifying the feature flag in LaunchDarkly.
+   * @param environmentKey The environment in which to check the feature flag's status.
+   * Default to the value of the `LD_ENV` environment variable, or `'test'` if that
+   * variable is unset.
+   * @returns The status of the feature flag, or `false` if there is no such flag in
+   * the given environment.
+   */
   async getFlagStatus(flagKey: string, environmentKey: string = process.env.LD_ENV || 'test'): Promise<boolean> {
     const response = await ldApi.get(`/flags/default/${flagKey}`);
     const parsed = LdFlagResponseSchema.parse(response.data);

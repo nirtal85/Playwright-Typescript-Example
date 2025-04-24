@@ -18,6 +18,7 @@
   "author": "Nir Tal",
   "license": "ISC",
   "devDependencies": {
+    "@aws-sdk/client-s3": "^3.787.0",
     "@playwright/test": "1.51.1",
     "@stylistic/eslint-plugin": "4.2.0",
     "@types/node": "22.13.14",
