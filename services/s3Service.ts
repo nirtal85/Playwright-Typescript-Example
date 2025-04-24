@@ -1,4 +1,4 @@
-import { S3Client, PutObjectCommand, PutObjectCommandOutput, S3ClientConfig } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, type PutObjectCommandOutput, type S3ClientConfig } from '@aws-sdk/client-s3';
 import { fromIni } from '@aws-sdk/credential-provider-ini';
 import * as fs from 'fs';
 
