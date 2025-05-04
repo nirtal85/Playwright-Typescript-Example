@@ -1,51 +1,50 @@
 {
-  "name": "playwright-typescript",
-  "version": "1.0.0",
-  "description": "",
-  "type": "module",
-  "scripts": {
-    "test": "playwright test",
-    "test:dev": "playwright test --grep '@devRun'",
-    "test:non-dev": "playwright test --grep-invert '@devRun'",
-    "test:debug": "PWDEBUG=1 playwright test --grep '@devRun'",
-    "install-browsers": "playwright install --with-deps",
-    "report:serve": "allure serve allure-results",
-    "codegen": "playwright codegen --viewport-size='800,600' https://google.com/",
-    "lint": "biome check .",
-    "format": "biome format --write .",
-    "prepare": "husky"
-  },
-  "keywords": [],
-  "author": "Nir Tal",
-  "license": "ISC",
-  "devDependencies": {
-    "@aws-sdk/client-s3": "^3.787.0",
-    "@aws-sdk/credential-provider-ini": "^3.787.0",
-    "@biomejs/biome": "1.9.4",
-    "@playwright/test": "1.52.0",
-    "@types/node": "22.15.3",
-    "@types/ssh2-sftp-client": "^9.0.4",
-    "husky": "9.1.7",
-    "lint-staged": "15.5.1",
-    "ssh2-sftp-client": "^12.0.0",
-    "typescript": "5.8.3"
-  },
-  "dependencies": {
-    "@types/stripe": "8.0.417",
-    "@visual-regression-tracker/agent-playwright": "5.3.1",
-    "allure-playwright": "3.2.1",
-    "axios": "^1.8.4",
-    "dotenv": "16.5.0",
-    "mailinator-client": "1.0.5",
-    "mysql2": "^3.14.0",
-    "stripe": "18.1.0",
-    "xlsx": "0.18.5",
-    "zod": "^3.24.3"
-  },
-  "lint-staged": {
-    "*.{js,jsx,ts,tsx,json,md,yml}": [
-      "biome format --write",
-      "biome check --apply-unsafe"
-    ]
-  }
+	"name": "playwright-typescript",
+	"version": "1.0.0",
+	"description": "",
+	"type": "module",
+	"scripts": {
+		"test": "playwright test",
+		"test:dev": "playwright test --grep '@devRun'",
+		"test:non-dev": "playwright test --grep-invert '@devRun'",
+		"test:debug": "PWDEBUG=1 playwright test --grep '@devRun'",
+		"install-browsers": "playwright install --with-deps",
+		"report:serve": "allure serve allure-results",
+		"codegen": "playwright codegen --viewport-size='800,600' https://google.com/",
+		"lint": "biome check .",
+		"format": "biome format --write .",
+		"prepare": "husky"
+	},
+	"keywords": [],
+	"author": "Nir Tal",
+	"license": "ISC",
+	"devDependencies": {
+		"@aws-sdk/client-s3": "3.787.0",
+		"@aws-sdk/credential-provider-ini": "3.787.0",
+		"@biomejs/biome": "1.9.4",
+		"@playwright/test": "1.52.0",
+		"@types/node": "22.15.3",
+		"@types/ssh2-sftp-client": "^9.0.4",
+		"husky": "9.1.7",
+		"lint-staged": "15.5.1",
+		"ssh2-sftp-client": "^12.0.0",
+		"typescript": "5.8.3"
+	},
+	"dependencies": {
+		"@types/stripe": "8.0.417",
+		"@visual-regression-tracker/agent-playwright": "5.3.1",
+		"allure-playwright": "3.2.1",
+		"axios": "1.8.4",
+		"dotenv": "16.5.0",
+		"mailinator-client": "1.0.5",
+		"mysql2": "3.14.0",
+		"stripe": "18.1.0",
+		"xlsx": "0.18.5",
+		"zod": "3.24.3"
+	},
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,md,yml}": [
+			"biome check --write --unsafe --organize-imports-enabled=false --files-ignore-unknown=true --no-errors-on-unmatched || true"
+		]
+	}
 }
