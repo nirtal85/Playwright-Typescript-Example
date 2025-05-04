@@ -31,8 +31,6 @@ export class DatabaseService {
       connection = await this.pool.getConnection();
       const [results] = await connection.query(sql, params);
       return results as T;
-    } catch (error) {
-      throw error;
     } finally {
       if (connection) {
         connection.release();

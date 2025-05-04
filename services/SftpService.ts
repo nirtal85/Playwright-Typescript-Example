@@ -1,5 +1,5 @@
 import SftpClient from 'ssh2-sftp-client';
-import path from 'path';
+import path from 'node:path';
 
 /** Local directory containing resources to upload */
 const RESOURCES_DIR = path.resolve(process.cwd(), 'resources');
@@ -52,7 +52,7 @@ export class SftpService {
    * @throws Will propagate any error thrown by the SFTP client
    * (e.g., connection issues, file not found locally, permissions).
    */
-  async uploadFile(localFileName: string, remoteDir: string = '/remote/upload'): Promise<void> {
+  async uploadFile(localFileName: string, remoteDir = '/remote/upload'): Promise<void> {
     const localFilePath = path.join(RESOURCES_DIR, localFileName);
     const remoteFilePath = path.posix.join(remoteDir, localFileName);
     await this.performSftpAction(async (client) => {
@@ -68,7 +68,7 @@ export class SftpService {
    * @param {string} [remoteDir="/remote/inbox"] - The remote directory to search in.
    * @returns {Promise<number>} - The number of matching regular files.
    */
-  async countFilesWithPrefix(filePrefix: string, remoteDir: string = '/remote/inbox'): Promise<number> {
+  async countFilesWithPrefix(filePrefix: string, remoteDir = '/remote/inbox'): Promise<number> {
     return await this.performSftpAction(async (client) => {
       const fileList = await client.list(remoteDir);
       return fileList.filter(file =>

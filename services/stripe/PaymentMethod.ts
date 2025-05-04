@@ -56,6 +56,6 @@ export class PaymentMethod {
    * @returns Credit card details
    */
   static getCreditCard(cardType: CardType): CreditCardDetails {
-    return this.creditCards[cardType];
+    return PaymentMethod.creditCards[cardType];
   }
 }

@@ -1,6 +1,6 @@
-import { S3Client, PutObjectCommand, type PutObjectCommandOutput, type S3ClientConfig } from '@aws-sdk/client-s3';
-import { fromIni } from '@aws-sdk/credential-provider-ini';
-import * as fs from 'fs';
+import {PutObjectCommand, type PutObjectCommandOutput, S3Client, type S3ClientConfig} from '@aws-sdk/client-s3';
+import {fromIni} from '@aws-sdk/credential-provider-ini';
+import * as fs from 'node:fs';
 
 /**
  * Service for interacting with AWS S3.
@@ -12,7 +12,7 @@ export class S3Service {
      * Initializes the S3 client.
      * @param [region='us-east-1'] - The AWS region to connect to.
      */
-  constructor(region: string = 'us-east-1') {
+  constructor(region = 'us-east-1') {
     const clientConfig: S3ClientConfig = {
       region,
       credentials: fromIni({ profile: process.env.ENVIRONMENT })
@@ -30,7 +30,6 @@ export class S3Service {
      * @throws {Error} Throws an error if the upload fails.
      */
   async uploadFile(bucketName: string, key: string, filePath: string): Promise<PutObjectCommandOutput> {
-    try {
       const fileStream = fs.createReadStream(filePath);
       const uploadParams = {
         Bucket: bucketName,
@@ -39,8 +38,5 @@ export class S3Service {
       };
       const command = new PutObjectCommand(uploadParams);
       return await this.s3Client.send(command);
-    } catch (err) {
-      throw err;
-    }
   }
 }

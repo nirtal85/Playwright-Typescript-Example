@@ -2,7 +2,6 @@
   "name": "playwright-typescript",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "playwright test",
@@ -12,6 +11,8 @@
     "install-browsers": "playwright install --with-deps",
     "report:serve": "allure serve allure-results",
     "codegen": "playwright codegen --viewport-size='800,600' https://google.com/",
+    "lint": "biome check .",
+    "format": "biome format --write .",
     "prepare": "husky"
   },
   "keywords": [],
@@ -20,14 +21,10 @@
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.787.0",
     "@aws-sdk/credential-provider-ini": "^3.787.0",
+    "@biomejs/biome": "1.9.4",
     "@playwright/test": "1.52.0",
-    "@stylistic/eslint-plugin": "4.2.0",
     "@types/node": "22.15.3",
     "@types/ssh2-sftp-client": "^9.0.4",
-    "@typescript-eslint/eslint-plugin": "8.31.1",
-    "@typescript-eslint/parser": "8.31.1",
-    "eslint": "9.25.1",
-    "eslint-plugin-playwright": "2.2.0",
     "husky": "9.1.7",
     "lint-staged": "15.5.1",
     "ssh2-sftp-client": "^12.0.0",
@@ -39,7 +36,6 @@
     "allure-playwright": "3.2.1",
     "axios": "^1.8.4",
     "dotenv": "16.5.0",
-    "eslint-plugin-import": "2.31.0",
     "mailinator-client": "1.0.5",
     "mysql2": "^3.14.0",
     "stripe": "18.1.0",
@@ -48,7 +44,8 @@
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx,json,md,yml}": [
-      "eslint --fix"
+      "biome format --write",
+      "biome check --apply-unsafe"
     ]
   }
 }
