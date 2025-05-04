@@ -43,5 +43,6 @@
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,json,md,yml}": ["npm run biome:fix --"]
-	}
+	},
+	"packageManager": "pnpm@10.10.0"
 }
