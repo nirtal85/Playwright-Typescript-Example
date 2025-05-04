@@ -1,15 +1,10 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "automerge": true,
-  "automergeType": "pr",
-  "extends": [
-    "config:recommended",
-    "group:all"
-  ],
-  "pre-commit": {
-    "enabled": true
-  },
-  "schedule": [
-    "monthly"
-  ]
+	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
+	"automerge": true,
+	"automergeType": "pr",
+	"extends": ["config:recommended", "group:all"],
+	"pre-commit": {
+		"enabled": true
+	},
+	"schedule": ["monthly"]
 }
