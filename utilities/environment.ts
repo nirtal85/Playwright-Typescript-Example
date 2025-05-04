@@ -1,20 +1,22 @@
-import { test } from '@playwright/test';
+import { test } from "@playwright/test";
 
 /**
  * Defines constants for known execution environments.
  */
 export const Environment = {
-  DEV: 'DEV',
-  CANARY: 'CANARY',
-  PROD: 'PROD'
+	DEV: "DEV",
+	CANARY: "CANARY",
+	PROD: "PROD",
 } as const;
 
 /**
  * Type alias for the string literal values of the environments.
  * Useful for type-checking function parameters.
  */
-export type EnvironmentValue = typeof Environment[keyof typeof Environment];
-const currentEnv = (process.env.DOMAIN || Environment.DEV).toLowerCase() as EnvironmentValue;
+export type EnvironmentValue = (typeof Environment)[keyof typeof Environment];
+const currentEnv = (
+	process.env.DOMAIN || Environment.DEV
+).toLowerCase() as EnvironmentValue;
 
 /**
  * Checks if the current execution environment matches the specified environment.
@@ -25,7 +27,7 @@ const currentEnv = (process.env.DOMAIN || Environment.DEV).toLowerCase() as Envi
  * @returns {boolean} True if the current environment matches the target, false otherwise.
  */
 export function isEnvironment(targetEnvironment: EnvironmentValue): boolean {
-  return currentEnv === targetEnvironment.toLowerCase();
+	return currentEnv === targetEnvironment.toLowerCase();
 }
 
 /**
@@ -35,8 +37,11 @@ export function isEnvironment(targetEnvironment: EnvironmentValue): boolean {
  * @param {EnvironmentValue} requiredEnvironment The environment the test is required to run in.
  */
 export function skipTestUnlessEnvironmentIs(
-  requiredEnvironment: EnvironmentValue
+	requiredEnvironment: EnvironmentValue,
 ): void {
-  const shouldSkip = !isEnvironment(requiredEnvironment);
-  test.skip(shouldSkip, `Skipping test because current environment '${currentEnv}' is not the required environment '${requiredEnvironment.toLowerCase()}'.`);
+	const shouldSkip = !isEnvironment(requiredEnvironment);
+	test.skip(
+		shouldSkip,
+		`Skipping test because current environment '${currentEnv}' is not the required environment '${requiredEnvironment.toLowerCase()}'.`,
+	);
 }

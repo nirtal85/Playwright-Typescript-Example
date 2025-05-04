@@ -1,8 +1,8 @@
-import { DIFF_TOLERANCE_PERCENT } from "../utilities/constants";
-import { PlaywrightVisualRegressionTracker } from "@visual-regression-tracker/agent-playwright";
 import type { ElementHandle, Page } from "@playwright/test";
 import { chromium, test } from "@playwright/test";
+import { PlaywrightVisualRegressionTracker } from "@visual-regression-tracker/agent-playwright";
 import type { IgnoreArea } from "@visual-regression-tracker/sdk-js";
+import { DIFF_TOLERANCE_PERCENT } from "../utilities/constants";
 
 /**
  * Options used to configure a visual regression tracking action.

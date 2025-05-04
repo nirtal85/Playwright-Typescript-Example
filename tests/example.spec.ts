@@ -1,8 +1,8 @@
-import { test } from "../fixtures/projectFixtures";
+import { readFileSync } from "node:fs";
+import path from "node:path";
 import { expect } from "@playwright/test";
 import * as allure from "allure-js-commons";
-import path from "node:path";
-import { readFileSync } from "node:fs";
+import { test } from "../fixtures/projectFixtures";
 import { DATA_PATH } from "../utilities/constants";
 
 test("has title", async ({ page }) => {

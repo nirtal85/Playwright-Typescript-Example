@@ -4,6 +4,7 @@
 	"description": "",
 	"type": "module",
 	"scripts": {
+		"biome:fix": "biome check --write --unsafe --organize-imports-enabled=false --files-ignore-unknown=true --no-errors-on-unmatched || true",
 		"test": "playwright test",
 		"test:dev": "playwright test --grep '@devRun'",
 		"test:non-dev": "playwright test --grep-invert '@devRun'",
@@ -43,8 +44,6 @@
 		"zod": "3.24.3"
 	},
 	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,md,yml}": [
-			"biome check --write --unsafe --organize-imports-enabled=false --files-ignore-unknown=true --no-errors-on-unmatched || true"
-		]
+		"*.{js,jsx,ts,tsx,json,md,yml}": ["npm run biome:fix --"]
 	}
 }

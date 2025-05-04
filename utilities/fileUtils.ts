@@ -1,6 +1,6 @@
-import type { UserData } from "../entities/UserData";
 import type { WorkBook, WorkSheet } from "xlsx";
 import xlsx from "xlsx";
+import type { UserData } from "../entities/UserData";
 
 /**
  * Read an Excel file and return its rows as structured objects.

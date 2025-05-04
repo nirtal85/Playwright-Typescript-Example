@@ -1,5 +1,5 @@
 export const FeatureFlags = {
-  EXAMPLE_FEATURE_A: 'example-feature-a'
+	EXAMPLE_FEATURE_A: "example-feature-a",
 } as const;
 
-export type FeatureFlagValue = typeof FeatureFlags[keyof typeof FeatureFlags];
+export type FeatureFlagValue = (typeof FeatureFlags)[keyof typeof FeatureFlags];
