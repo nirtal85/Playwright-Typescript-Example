@@ -1,8 +1,8 @@
-import { test } from '../fixtures/projectFixtures';
-import { expect } from '@playwright/test';
-import * as path from 'path';
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
+import {test} from '../fixtures/projectFixtures';
+import {expect} from '@playwright/test';
+import * as path from 'node:path';
+import {dirname} from 'node:path';
+import {fileURLToPath} from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

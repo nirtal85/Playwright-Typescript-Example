@@ -1,9 +1,9 @@
-import { test } from '../fixtures/projectFixtures';
-import { Constants } from '../utilities/constants';
-import { expect } from '@playwright/test';
+import {test} from '../fixtures/projectFixtures';
+import {Constants} from '../utilities/constants';
+import {expect} from '@playwright/test';
 import * as allure from 'allure-js-commons';
-import path from 'path';
-import { readFileSync } from 'fs';
+import path from 'node:path';
+import {readFileSync} from 'node:fs';
 
 test('has title', async ({ page }) => {
   await test.step('Navigate to Playwright website', async () => {

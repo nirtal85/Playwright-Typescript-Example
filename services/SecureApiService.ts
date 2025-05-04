@@ -1,8 +1,8 @@
+import type {AxiosInstance, AxiosRequestConfig, AxiosResponse} from 'axios';
 import axios from 'axios';
-import type { AxiosInstance, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { readFileSync } from 'fs';
-import { Agent } from 'https';
-import path from 'path';
+import {readFileSync} from 'node:fs';
+import {Agent} from 'node:https';
+import path from 'node:path';
 
 /**
  * A generic payload interface for secure POST requests.
