@@ -14,6 +14,9 @@ importers:
       '@visual-regression-tracker/agent-playwright':
         specifier: 5.3.1
         version: 5.3.1
+      allure-js-commons:
+        specifier: 3.2.1
+        version: 3.2.1(allure-playwright@3.2.1(@playwright/test@1.52.0))
       allure-playwright:
         specifier: 3.2.1
         version: 3.2.1(@playwright/test@1.52.0)
@@ -2616,6 +2619,7 @@ snapshots:
     dependencies:
       '@types/stripe': 8.0.417(@types/node@13.13.52)
       '@visual-regression-tracker/agent-playwright': 5.3.1
+      allure-js-commons: 3.2.1(allure-playwright@3.2.1(@playwright/test@1.52.0))
       allure-playwright: 3.2.1(@playwright/test@1.52.0)
       axios: 1.8.4
       dotenv: 16.5.0

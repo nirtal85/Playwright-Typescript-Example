@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@types/stripe": "8.0.417",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
+		"allure-js-commons": "3.2.1",
 		"allure-playwright": "3.2.1",
 		"axios": "1.8.4",
 		"dotenv": "16.5.0",
