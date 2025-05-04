@@ -11,35 +11,19 @@ import { S3Service } from "../services/s3Service";
 import { StripeService } from "../services/stripe/StripeService";
 
 interface Fixtures {
-	homePage: HomePage;
-	mailinatorService: MailinatorService;
-	visualTracker: VisualTrackerService;
 	databaseService: DatabaseService;
-	stripeService: StripeService;
+	homePage: HomePage;
 	launchDarklyService: LaunchDarklyService;
-	sftpService: SftpService;
-	secureApiService: SecureApiService;
+	mailinatorService: MailinatorService;
 	networkBlockerService: NetworkBlockerService;
 	s3Service: S3Service;
+	secureApiService: SecureApiService;
+	sftpService: SftpService;
+	stripeService: StripeService;
+	visualTracker: VisualTrackerService;
 }
 
 export const test = base.extend<Fixtures>({
-	homePage: async ({ page }, use) => {
-		await use(new HomePage(page));
-	},
-	mailinatorService: async ({}, use) => {
-		const mailService = new MailinatorService(
-			process.env.MAILINATOR_API_TOKEN!,
-			process.env.MAILINATOR_DOMAIN,
-		);
-		await use(mailService);
-	},
-	visualTracker: async ({}, use) => {
-		const tracker = new VisualTrackerService();
-		await tracker.start();
-		await use(tracker);
-		await tracker.stop();
-	},
 	databaseService: [
 		async ({}, use) => {
 			const dbService = new DatabaseService();
@@ -48,24 +32,19 @@ export const test = base.extend<Fixtures>({
 		},
 		{ scope: "test" },
 	],
-	stripeService: async ({}, use) => {
-		const stripeService = new StripeService(process.env.STRIPE_SECRET_KEY!);
-		await use(stripeService);
+	homePage: async ({ page }, use) => {
+		await use(new HomePage(page));
 	},
 	launchDarklyService: async ({}, use) => {
 		const ldService = new LaunchDarklyService();
 		await use(ldService);
 	},
-	sftpService: [
-		async ({}, use) => {
-			const sftp = new SftpService();
-			await use(sftp);
-		},
-		{ scope: "test" },
-	],
-	secureApiService: async ({}, use) => {
-		const service = new SecureApiService();
-		await use(service);
+	mailinatorService: async ({}, use) => {
+		const mailService = new MailinatorService(
+			process.env.MAILINATOR_API_TOKEN!,
+			process.env.MAILINATOR_DOMAIN,
+		);
+		await use(mailService);
 	},
 	networkBlockerService: [
 		async ({ page }, use) => {
@@ -84,6 +63,27 @@ export const test = base.extend<Fixtures>({
 	s3Service: async ({}, use) => {
 		const s3 = new S3Service();
 		await use(s3);
+	},
+	secureApiService: async ({}, use) => {
+		const service = new SecureApiService();
+		await use(service);
+	},
+	sftpService: [
+		async ({}, use) => {
+			const sftp = new SftpService();
+			await use(sftp);
+		},
+		{ scope: "test" },
+	],
+	stripeService: async ({}, use) => {
+		const stripeService = new StripeService(process.env.STRIPE_SECRET_KEY!);
+		await use(stripeService);
+	},
+	visualTracker: async ({}, use) => {
+		const tracker = new VisualTrackerService();
+		await tracker.start();
+		await use(tracker);
+		await tracker.stop();
 	},
 });
 
