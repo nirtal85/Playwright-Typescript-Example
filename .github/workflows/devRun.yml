@@ -20,7 +20,7 @@ jobs:
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     container:
-      image: mcr.microsoft.com/playwright:v1.52.0-jammy
+      image: mcr.microsoft.com/playwright:v1.52.0
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
