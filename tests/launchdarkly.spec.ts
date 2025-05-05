@@ -8,7 +8,6 @@ test.describe("LaunchDarkly Service", () => {
 	}) => {
 		const flagKey = FeatureFlags.EXAMPLE_FEATURE_A;
 		const environmentKey = "test";
-
 		const isOn = await launchDarklyService.getFlagStatus(
 			flagKey,
 			environmentKey,
