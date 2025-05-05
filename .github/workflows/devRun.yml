@@ -24,13 +24,17 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
       - name: Install Node.js
         uses: actions/setup-node@v4
         with:
           node-version: lts/*
           cache: 'pnpm'
       - name: Install dependencies
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
       - name: Run Playwright tests
         run: xvfb-run pnpm exec playwright test --grep "@devRun"
       - name: Link Git Information And Browser Version To Allure Report
