@@ -23,6 +23,7 @@
 	"dependencies": {
 		"@types/stripe": "8.0.417",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
+		"allure-js-commons": "3.2.1",
 		"allure-playwright": "3.2.1",
 		"axios": "1.8.4",
 		"dotenv": "16.5.0",
@@ -43,5 +44,6 @@
 		"lint-staged": "15.5.1",
 		"ssh2-sftp-client": "^12.0.0",
 		"typescript": "5.8.3"
-	}
+	},
+	"packageManager": "pnpm@10.10.0"
 }
