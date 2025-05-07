@@ -14,7 +14,7 @@ on:
       - '.github/workflows/devRun.yml'
 
 permissions:
-  contents: read
+  contents: write
   pages: write
 
 jobs:
