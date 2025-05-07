@@ -7,40 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      '@types/stripe':
-        specifier: 8.0.417
-        version: 8.0.417(@types/node@22.15.3)
-      '@visual-regression-tracker/agent-playwright':
-        specifier: 5.3.1
-        version: 5.3.1
-      allure-js-commons:
-        specifier: 3.2.1
-        version: 3.2.1(allure-playwright@3.2.1(@playwright/test@1.52.0))
-      allure-playwright:
-        specifier: 3.2.1
-        version: 3.2.1(@playwright/test@1.52.0)
-      axios:
-        specifier: 1.8.4
-        version: 1.8.4
-      dotenv:
-        specifier: 16.5.0
-        version: 16.5.0
-      mailinator-client:
-        specifier: 1.0.5
-        version: 1.0.5(@playwright/test@1.52.0)
-      mysql2:
-        specifier: 3.14.0
-        version: 3.14.0
-      stripe:
-        specifier: 18.1.0
-        version: 18.1.0(@types/node@22.15.3)
-      xlsx:
-        specifier: 0.18.5
-        version: 0.18.5
-      zod:
-        specifier: 3.24.3
-        version: 3.24.3
     devDependencies:
       '@aws-sdk/client-s3':
         specifier: 3.787.0
@@ -60,18 +26,51 @@ importers:
       '@types/ssh2-sftp-client':
         specifier: ^9.0.4
         version: 9.0.4
+      '@types/stripe':
+        specifier: 8.0.417
+        version: 8.0.417(@types/node@22.15.3)
+      '@visual-regression-tracker/agent-playwright':
+        specifier: 5.3.1
+        version: 5.3.1
+      allure-js-commons:
+        specifier: 3.2.1
+        version: 3.2.1(allure-playwright@3.2.1(@playwright/test@1.52.0))
+      allure-playwright:
+        specifier: 3.2.1
+        version: 3.2.1(@playwright/test@1.52.0)
+      axios:
+        specifier: 1.8.4
+        version: 1.8.4
+      dotenv:
+        specifier: 16.5.0
+        version: 16.5.0
       husky:
         specifier: 9.1.7
         version: 9.1.7
       lint-staged:
         specifier: 15.5.1
         version: 15.5.1
+      mailinator-client:
+        specifier: 1.0.5
+        version: 1.0.5
+      mysql2:
+        specifier: 3.14.0
+        version: 3.14.0
       ssh2-sftp-client:
-        specifier: ^12.0.0
+        specifier: 12.0.0
         version: 12.0.0
+      stripe:
+        specifier: 18.1.0
+        version: 18.1.0(@types/node@22.15.3)
       typescript:
         specifier: 5.8.3
         version: 5.8.3
+      xlsx:
+        specifier: 0.18.5
+        version: 0.18.5
+      zod:
+        specifier: 3.24.3
+        version: 3.24.3
 
 packages:
 
@@ -2114,12 +2113,6 @@ snapshots:
     dependencies:
       '@types/node': 18.19.86
 
-  '@types/stripe@8.0.417(@types/node@13.13.52)':
-    dependencies:
-      stripe: 18.1.0(@types/node@13.13.52)
-    transitivePeerDependencies:
-      - '@types/node'
-
   '@types/stripe@8.0.417(@types/node@22.15.3)':
     dependencies:
       stripe: 18.1.0(@types/node@22.15.3)
@@ -2510,16 +2503,13 @@ snapshots:
 
   lru.min@1.1.2: {}
 
-  mailinator-client@1.0.5(@playwright/test@1.52.0):
+  mailinator-client@1.0.5:
     dependencies:
       '@types/node': 13.13.52
       create-index: 2.6.0
       fs: 0.0.1-security
-      mailinator-client: playwright-typescript@file:(@playwright/test@1.52.0)(@types/node@13.13.52)
+      mailinator-client: 'playwright-typescript@file:'
       typed-rest-client: 1.8.11
-    transitivePeerDependencies:
-      - '@playwright/test'
-      - debug
 
   math-intrinsics@1.1.0: {}
 
@@ -2615,23 +2605,7 @@ snapshots:
 
   playwright-core@1.52.0: {}
 
-  playwright-typescript@file:(@playwright/test@1.52.0)(@types/node@13.13.52):
-    dependencies:
-      '@types/stripe': 8.0.417(@types/node@13.13.52)
-      '@visual-regression-tracker/agent-playwright': 5.3.1
-      allure-js-commons: 3.2.1(allure-playwright@3.2.1(@playwright/test@1.52.0))
-      allure-playwright: 3.2.1(@playwright/test@1.52.0)
-      axios: 1.8.4
-      dotenv: 16.5.0
-      mailinator-client: 1.0.5(@playwright/test@1.52.0)
-      mysql2: 3.14.0
-      stripe: 18.1.0(@types/node@13.13.52)
-      xlsx: 0.18.5
-      zod: 3.24.3
-    transitivePeerDependencies:
-      - '@playwright/test'
-      - '@types/node'
-      - debug
+  'playwright-typescript@file:': {}
 
   playwright@1.52.0:
     dependencies:
@@ -2762,12 +2736,6 @@ snapshots:
       ansi-regex: 6.0.1
 
   strip-final-newline@3.0.0: {}
-
-  stripe@18.1.0(@types/node@13.13.52):
-    dependencies:
-      qs: 6.14.0
-    optionalDependencies:
-      '@types/node': 13.13.52
 
   stripe@18.1.0(@types/node@22.15.3):
     dependencies:

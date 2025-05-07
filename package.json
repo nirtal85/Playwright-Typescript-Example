@@ -20,7 +20,7 @@
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx,json,md,yml}": ["npm run biome:fix --"]
 	},
-	"dependencies": {
+	"devDependencies": {
 		"@types/stripe": "8.0.417",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
 		"allure-js-commons": "3.2.1",
@@ -31,9 +31,9 @@
 		"mysql2": "3.14.0",
 		"stripe": "18.1.0",
 		"xlsx": "0.18.5",
-		"zod": "3.24.3"
-	},
-	"devDependencies": {
+		"zod": "3.24.3",
+		"ssh2-sftp-client": "12.0.0",
+		"typescript": "5.8.3",
 		"@aws-sdk/client-s3": "3.787.0",
 		"@aws-sdk/credential-provider-ini": "3.787.0",
 		"@biomejs/biome": "1.9.4",
@@ -41,9 +41,7 @@
 		"@types/node": "22.15.3",
 		"@types/ssh2-sftp-client": "^9.0.4",
 		"husky": "9.1.7",
-		"lint-staged": "15.5.1",
-		"ssh2-sftp-client": "^12.0.0",
-		"typescript": "5.8.3"
+		"lint-staged": "15.5.1"
 	},
 	"packageManager": "pnpm@10.10.0"
 }
