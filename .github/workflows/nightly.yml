@@ -20,7 +20,6 @@ permissions:
   contents: write
   pages: write
 
-
 jobs:
   setup-matrix:
     runs-on: ubuntu-latest
