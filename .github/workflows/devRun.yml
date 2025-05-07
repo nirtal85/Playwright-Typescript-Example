@@ -13,6 +13,10 @@ on:
       - 'eslint.config.js'
       - '.github/workflows/devRun.yml'
 
+permissions:
+  contents: write
+  pages: write
+
 jobs:
   merge_test:
     timeout-minutes: 15
@@ -51,7 +55,7 @@ jobs:
            echo GIT_COMMIT_TIME="$(git show -s --format=%ci HEAD)"
           } >> environment.properties
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@v1.12
         if: always()
         id: allure-report
         with:
