@@ -26,9 +26,6 @@ importers:
       '@types/ssh2-sftp-client':
         specifier: ^9.0.4
         version: 9.0.4
-      '@types/stripe':
-        specifier: 8.0.417
-        version: 8.0.417(@types/node@22.15.3)
       '@visual-regression-tracker/agent-playwright':
         specifier: 5.3.1
         version: 5.3.1
@@ -509,10 +506,6 @@ packages:
 
   '@types/ssh2@1.15.5':
     resolution: {integrity: sha512-N1ASjp/nXH3ovBHddRJpli4ozpk6UdDYIX4RJWFa9L1YKnzdhTlVmiGHm4DZnj/jLbqZpes4aeR30EFGQtvhQQ==}
-
-  '@types/stripe@8.0.417':
-    resolution: {integrity: sha512-PTuqskh9YKNENnOHGVJBm4sM0zE8B1jZw1JIskuGAPkMB+OH236QeN8scclhYGPA4nG6zTtPXgwpXdp+HPDTVw==}
-    deprecated: This is a stub types definition. stripe provides its own type definitions, so you do not need this installed.
 
   '@visual-regression-tracker/agent-playwright@5.3.1':
     resolution: {integrity: sha512-sy9sT86Tp8QfXMzojgZ9V3MxoFMZttVSrPmV78Gl0Hun3mF50uUhtXwV/64SwdJcVUnaostyIaombIluuhVH0Q==}
@@ -2112,12 +2105,6 @@ snapshots:
   '@types/ssh2@1.15.5':
     dependencies:
       '@types/node': 18.19.86
-
-  '@types/stripe@8.0.417(@types/node@22.15.3)':
-    dependencies:
-      stripe: 18.1.0(@types/node@22.15.3)
-    transitivePeerDependencies:
-      - '@types/node'
 
   '@visual-regression-tracker/agent-playwright@5.3.1':
     dependencies:
