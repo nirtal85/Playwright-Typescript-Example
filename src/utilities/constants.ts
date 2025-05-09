@@ -6,4 +6,4 @@ const __dirname = dirname(__filename);
 
 export const DIFF_TOLERANCE_PERCENT = 0.01;
 export const AUTOMATION_USER_AGENT = "automation";
-export const DATA_PATH = join(__dirname, "..", "resources");
+export const DATA_PATH = join(__dirname, "../../resources");
