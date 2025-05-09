@@ -1,8 +1,8 @@
 import path from "node:path";
 import { expect, test } from "@playwright/test";
 import * as allure from "allure-js-commons";
-import { DATA_PATH } from "../utilities/constants";
-import { readExcelFile } from "../utilities/fileUtils";
+import { DATA_PATH } from "../src/utilities/constants";
+import { readExcelFile } from "../src/utilities/fileUtils";
 
 const data = await readExcelFile(path.join(DATA_PATH, "data.xls"));
 

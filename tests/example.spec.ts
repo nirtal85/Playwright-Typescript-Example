@@ -2,8 +2,8 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { expect } from "@playwright/test";
 import * as allure from "allure-js-commons";
-import { test } from "../fixtures/projectFixtures";
-import { DATA_PATH } from "../utilities/constants";
+import { test } from "../src/fixtures/projectFixtures";
+import { DATA_PATH } from "../src/utilities/constants";
 
 test("has title", async ({ page }) => {
 	await test.step("Navigate to Playwright website", async () => {

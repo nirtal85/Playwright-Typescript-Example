@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/projectFixtures";
+import { test } from "../src/fixtures/projectFixtures";
 
 const inbox = "auto1742938795902";
 
