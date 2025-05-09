@@ -27,7 +27,6 @@
 		"@playwright/test": "1.52.0",
 		"@types/node": "22.15.3",
 		"@types/ssh2-sftp-client": "^9.0.4",
-		"@types/stripe": "8.0.417",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
 		"allure-js-commons": "3.2.1",
 		"allure-playwright": "3.2.1",
