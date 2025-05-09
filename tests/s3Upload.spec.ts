@@ -2,7 +2,7 @@ import * as path from "node:path";
 import { dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/projectFixtures";
+import { test } from "../src/fixtures/projectFixtures";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

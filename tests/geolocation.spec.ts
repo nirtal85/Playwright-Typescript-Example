@@ -1,5 +1,5 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/projectFixtures";
+import { test } from "../src/fixtures/projectFixtures";
 
 test.use({
 	geolocation: { longitude: 1, latitude: 1 },

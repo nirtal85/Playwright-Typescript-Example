@@ -1,6 +1,6 @@
 import { expect } from "@playwright/test";
-import { test } from "../fixtures/projectFixtures";
-import { FeatureFlags } from "../services/launchDarkly/featureFlags";
+import { test } from "../src/fixtures/projectFixtures";
+import { FeatureFlags } from "../src/services/launchDarkly/featureFlags";
 
 test.describe("LaunchDarkly Service", () => {
 	test.skip("should fetch status for a known feature flag", async ({
