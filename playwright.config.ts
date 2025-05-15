@@ -51,7 +51,13 @@ export default defineConfig({
 				viewport: null,
 				testIdAttribute: "data-test",
 				userAgent: AUTOMATION_USER_AGENT,
-				permissions: ["geolocation", "microphone", "camera"],
+				permissions: [
+					"geolocation",
+					"microphone",
+					"camera",
+					"clipboard-read",
+					"clipboard-write",
+				],
 				launchOptions: {
 					timeout: 0,
 					args: [
