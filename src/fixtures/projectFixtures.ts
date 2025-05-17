@@ -87,7 +87,7 @@ export const test = base.extend<Fixtures>({
 	},
 });
 
-test.afterEach(async ({ request }, testInfo) => {
+test.afterEach(async ({ request, page }, testInfo) => {
 	if (testInfo.status !== testInfo.expectedStatus) {
 		const response = await request.get("https://checkip.amazonaws.com");
 		const ip = await response.text();
@@ -95,5 +95,14 @@ test.afterEach(async ({ request }, testInfo) => {
 			body: ip.trim(),
 			contentType: "text/plain",
 		});
+		const pages = page.context().pages();
+		for (let i = 0; i < pages.length; i++) {
+			const currentPage = pages[i];
+			const url = currentPage.url();
+			await testInfo.attach(`URL of window ${i}`, {
+				body: url,
+				contentType: "text/uri-list",
+			});
+		}
 	}
 });
