@@ -21,26 +21,26 @@
 		"*.{js,jsx,ts,tsx,json,md,yml}": ["npm run biome:fix --"]
 	},
 	"devDependencies": {
-		"@aws-sdk/client-s3": "3.828.0",
-		"@aws-sdk/credential-provider-ini": "3.828.0",
-		"@biomejs/biome": "1.9.4",
-		"@playwright/test": "1.53.0",
-		"@types/node": "22.15.31",
+		"@aws-sdk/client-s3": "3.840.0",
+		"@aws-sdk/credential-provider-ini": "3.840.0",
+		"@biomejs/biome": "2.0.6",
+		"@playwright/test": "1.53.2",
+		"@types/node": "22.15.35",
 		"@types/ssh2-sftp-client": "^9.0.4",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
-		"allure-js-commons": "3.2.2",
-		"allure-playwright": "3.2.2",
+		"allure-js-commons": "3.3.0",
+		"allure-playwright": "3.3.0",
 		"axios": "1.10.0",
-		"dotenv": "16.5.0",
+		"dotenv": "17.0.1",
 		"husky": "9.1.7",
-		"lint-staged": "16.1.1",
+		"lint-staged": "16.1.2",
 		"mailinator-client": "1.0.6",
 		"mysql2": "3.14.1",
-		"ssh2-sftp-client": "12.0.0",
+		"ssh2-sftp-client": "12.0.1",
 		"stripe": "18.2.1",
 		"typescript": "5.8.3",
 		"xlsx": "0.18.5",
-		"zod": "3.25.64"
+		"zod": "3.25.67"
 	},
-	"packageManager": "pnpm@10.12.1"
+	"packageManager": "pnpm@10.12.4"
 }
