@@ -24,7 +24,7 @@ jobs:
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     container:
-      image: mcr.microsoft.com/playwright:v1.53.2
+      image: mcr.microsoft.com/playwright:v1.54.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4
