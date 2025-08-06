@@ -18,7 +18,9 @@
 		"test:non-dev": "playwright test --grep-invert '@devRun'"
 	},
 	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,md,yml}": ["npm run biome:fix --"]
+		"*.{js,jsx,ts,tsx,json,md,yml}": [
+			"npm run biome:fix --"
+		]
 	},
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.859.0",
