@@ -29,12 +29,12 @@ export class SecureApiService {
 			rejectUnauthorized: true,
 		});
 		const config: AxiosRequestConfig = {
-			httpsAgent,
 			headers: {
 				Accept: "application/json",
-				"Content-Type": "application/json",
 				Authorization: `Bearer ${process.env.BEARER}`,
+				"Content-Type": "application/json",
 			},
+			httpsAgent,
 		};
 		this.axiosInstance = axios.create(config);
 		this.axiosInstance.interceptors.response.use(

@@ -1,27 +1,6 @@
 {
-	"name": "playwright-typescript",
-	"version": "1.0.0",
-	"description": "",
-	"keywords": [],
-	"license": "ISC",
 	"author": "Nir Tal",
-	"type": "module",
-	"scripts": {
-		"biome:fix": "biome check --write --unsafe --no-errors-on-unmatched || true",
-		"codegen": "playwright codegen",
-		"install-browsers": "playwright install --with-deps",
-		"prepare": "husky",
-		"report:serve": "allure serve allure-results",
-		"test": "playwright test",
-		"test:debug": "PWDEBUG=1 playwright test --grep '@devRun'",
-		"test:dev": "playwright test --grep '@devRun'",
-		"test:non-dev": "playwright test --grep-invert '@devRun'"
-	},
-	"lint-staged": {
-		"*.{js,jsx,ts,tsx,json,md,yml}": [
-			"npm run biome:fix --"
-		]
-	},
+	"description": "",
 	"devDependencies": {
 		"@aws-sdk/client-s3": "3.859.0",
 		"@aws-sdk/credential-provider-ini": "3.859.0",
@@ -44,5 +23,26 @@
 		"xlsx": "0.18.5",
 		"zod": "4.0.14"
 	},
-	"packageManager": "pnpm@10.14.0"
+	"keywords": [],
+	"license": "ISC",
+	"lint-staged": {
+		"*.{js,jsx,ts,tsx,json,md,yml}": [
+			"npm run biome:fix --"
+		]
+	},
+	"name": "playwright-typescript",
+	"packageManager": "pnpm@10.14.0",
+	"scripts": {
+		"biome:fix": "biome check --write --unsafe --no-errors-on-unmatched || true",
+		"codegen": "playwright codegen",
+		"install-browsers": "playwright install --with-deps",
+		"prepare": "husky",
+		"report:serve": "allure serve allure-results",
+		"test": "playwright test",
+		"test:debug": "PWDEBUG=1 playwright test --grep '@devRun'",
+		"test:dev": "playwright test --grep '@devRun'",
+		"test:non-dev": "playwright test --grep-invert '@devRun'"
+	},
+	"type": "module",
+	"version": "1.0.0"
 }

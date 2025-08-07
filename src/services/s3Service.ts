@@ -19,8 +19,8 @@ export class S3Service {
 	 */
 	constructor(region = "us-east-1") {
 		const clientConfig: S3ClientConfig = {
-			region,
 			credentials: fromIni({ profile: process.env.ENVIRONMENT }),
+			region,
 		};
 		this.s3Client = new S3Client(clientConfig);
 	}
@@ -41,9 +41,9 @@ export class S3Service {
 	): Promise<PutObjectCommandOutput> {
 		const fileStream = fs.createReadStream(filePath);
 		const uploadParams = {
+			Body: fileStream,
 			Bucket: bucketName,
 			Key: key,
-			Body: fileStream,
 		};
 		const command = new PutObjectCommand(uploadParams);
 		return await this.s3Client.send(command);

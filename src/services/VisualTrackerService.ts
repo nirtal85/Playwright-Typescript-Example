@@ -83,9 +83,9 @@ export class VisualTrackerService {
 			ignoreElements,
 		);
 		await this.vrt.trackPage(page, name, {
+			comment,
 			diffTollerancePercent: diffTolerancePercent,
 			ignoreAreas,
-			comment,
 			screenshotOptions: { fullPage },
 		});
 	}
@@ -118,9 +118,9 @@ export class VisualTrackerService {
 			ignoreElements,
 		);
 		await this.vrt.trackElementHandle(elementHandle, name, {
+			comment,
 			diffTollerancePercent: diffTolerancePercent,
 			ignoreAreas,
-			comment,
 		});
 	}
 
@@ -143,10 +143,10 @@ export class VisualTrackerService {
 				const box = await elementHandle.boundingBox();
 				if (!box) return null;
 				return {
+					height: Math.ceil(box.height),
+					width: Math.ceil(box.width),
 					x: Math.floor(box.x),
 					y: Math.floor(box.y),
-					width: Math.ceil(box.width),
-					height: Math.ceil(box.height),
 				};
 			}),
 		).then((areas) => areas.filter((area): area is IgnoreArea => !!area));

@@ -26,12 +26,12 @@ export class StripeService {
 		if (!invoiceId) throw new Error("Invoice ID is required");
 		await this.stripe.invoices.update(invoiceId, {
 			metadata: {
-				serviceType: "Premium",
-				serviceDate: "2024‑12‑31",
 				serviceCategory: "Consulting",
+				serviceDate: "2024‑12‑31",
 				serviceDuration: "60 minutes",
 				serviceLocation: "Remote",
 				serviceNotes: "Initial consultation session",
+				serviceType: "Premium",
 			},
 		});
 	}
@@ -40,21 +40,21 @@ export class StripeService {
 	async createInvoice(customerId: string): Promise<string> {
 		if (!customerId) throw new Error("Customer ID is required");
 		const invoice = await this.stripe.invoices.create({
-			customer: customerId,
 			auto_advance: true,
 			collection_method: "send_invoice",
+			customer: customerId,
 			days_until_due: 30,
 		});
 		if (!invoice.id) throw new Error("Failed to create invoice");
 		await this.stripe.invoiceItems.create({
 			customer: customerId,
+			description: "Premium service package",
+			invoice: invoice.id,
 			price_data: {
 				currency: "usd",
 				product: "prod_test",
 				unit_amount: 1_000,
 			},
-			description: "Premium service package",
-			invoice: invoice.id,
 		});
 		return invoice.id;
 	}
@@ -73,8 +73,8 @@ export class StripeService {
 		if (!customerId) throw new Error("Customer ID is required");
 		const token = getCreditCard(cardType).token;
 		const pm = await this.stripe.paymentMethods.create({
-			type: "card",
 			card: { token },
+			type: "card",
 		});
 		await this.stripe.paymentMethods.attach(pm.id, { customer: customerId });
 	}
@@ -102,8 +102,8 @@ export class StripeService {
 		if (!customerId) throw new Error("Customer ID is required");
 		const token = getCreditCard(cardType).token;
 		const paymentMethod = await this.stripe.paymentMethods.create({
-			type: "card",
 			card: { token },
+			type: "card",
 		});
 		await this.stripe.paymentMethods.attach(paymentMethod.id, {
 			customer: customerId,

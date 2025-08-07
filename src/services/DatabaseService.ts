@@ -9,17 +9,17 @@ export class DatabaseService {
 		const dbUser = process.env.DB_USER;
 		const dbPassword = process.env.DB_PASSWORD;
 		const connectionOptions: mysql.PoolOptions = {
-			host: dbHost,
-			port: dbPort,
-			user: dbUser,
-			password: dbPassword,
-			waitForConnections: true,
 			connectionLimit: 10,
+			host: dbHost,
+			password: dbPassword,
+			port: dbPort,
 			queueLimit: 0,
 			ssl: {
 				minVersion: "TLSv1.2",
 				rejectUnauthorized: false,
 			},
+			user: dbUser,
+			waitForConnections: true,
 		};
 
 		this.pool = mysql.createPool(connectionOptions);

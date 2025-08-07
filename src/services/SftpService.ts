@@ -19,9 +19,9 @@ export class SftpService {
 		const password = process.env.SFTP_PASSWORD;
 		this.config = {
 			host,
-			username,
 			password,
 			readyTimeout: CONNECT_TIMEOUT_MS,
+			username,
 		};
 	}
 

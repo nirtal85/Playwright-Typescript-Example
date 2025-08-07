@@ -4,8 +4,8 @@ import { test } from "@playwright/test";
  * Defines constants for known execution environments.
  */
 export const Environment = {
-	DEV: "DEV",
 	CANARY: "CANARY",
+	DEV: "DEV",
 	PROD: "PROD",
 } as const;
 

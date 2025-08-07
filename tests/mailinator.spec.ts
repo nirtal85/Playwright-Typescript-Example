@@ -8,8 +8,8 @@ test.describe(
 	{
 		annotation: [
 			{
-				type: "skip",
 				description: "Requires mailinator client",
+				type: "skip",
 			},
 		],
 	},
