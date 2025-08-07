@@ -12,6 +12,7 @@ export default defineConfig({
 		{
 			name: "chromium",
 			use: {
+				acceptDownloads: true,
 				actionTimeout: 30 * 1000,
 				launchOptions: {
 					args: [
@@ -44,19 +45,21 @@ export default defineConfig({
 			},
 		},
 	],
-	reporter: [
-		[
-			"allure-playwright",
-			{
-				links: {
-					issue: { nameTemplate: "Issue #%s", urlTemplate: "https://%s" },
-					link: { nameTemplate: "Link #%s", urlTemplate: "https://%s" },
-					tms: { nameTemplate: "TMS #%s", urlTemplate: "https://%s" },
-				},
-			},
-		],
-		["junit", { outputFile: "test-results/results.xml" }],
-	],
+	reporter: process.env.CI
+		? [
+				[
+					"allure-playwright",
+					{
+						links: {
+							issue: { urlTemplate: "https://%s" },
+							link: { urlTemplate: "https://%s" },
+							tms: { urlTemplate: "https://%s" },
+						},
+					},
+				],
+				["junit", { outputFile: "test-results/results.xml" }],
+			]
+		: [],
 	retries: process.env.CI ? 2 : 0,
 	testDir: "./tests",
 	timeout: 15 * 60 * 1000,
