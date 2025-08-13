@@ -1,5 +1,5 @@
 import path from "node:path";
-import { test } from "../src/fixtures/projectFixtures";
+import { test } from "@src/fixtures/projectFixtures";
 
 test("file upload using filechooser", async ({ page }) => {
 	await page.goto(

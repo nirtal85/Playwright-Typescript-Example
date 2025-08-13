@@ -1,5 +1,4 @@
 import { expect } from "@playwright/test";
-// stripe-service.ts
 import Stripe from "stripe";
 import { type CardType, getCreditCard } from "./PaymentMethod";
 

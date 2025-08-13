@@ -1,6 +1,6 @@
 import { defineConfig } from "@playwright/test";
+import { AUTOMATION_USER_AGENT } from "@src/utilities/constants";
 import { config as dotenvConfig } from "dotenv";
-import { AUTOMATION_USER_AGENT } from "./src/utilities/constants";
 
 dotenvConfig();
 
