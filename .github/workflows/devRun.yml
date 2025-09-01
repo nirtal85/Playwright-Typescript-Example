@@ -24,10 +24,10 @@ jobs:
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     container:
-      image: mcr.microsoft.com/playwright:v1.54.2
+      image: mcr.microsoft.com/playwright:v1.55.0
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -55,7 +55,7 @@ jobs:
            echo GIT_COMMIT_TIME="$(git show -s --format=%ci HEAD)"
           } >> environment.properties
       - name: Generate Allure Report
-        uses: simple-elf/allure-report-action@v1.12
+        uses: simple-elf/allure-report-action@v1.13
         if: always()
         id: allure-report
         with:
