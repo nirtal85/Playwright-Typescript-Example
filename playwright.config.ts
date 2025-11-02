@@ -2,7 +2,7 @@ import { defineConfig } from "@playwright/test";
 import { AUTOMATION_USER_AGENT } from "@src/utilities/constants";
 import { config as dotenvConfig } from "dotenv";
 
-dotenvConfig();
+dotenvConfig({ quiet: true });
 
 export default defineConfig({
 	expect: { timeout: 30 * 1000 },
