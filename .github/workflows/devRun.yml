@@ -24,10 +24,10 @@ jobs:
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     container:
-      image: mcr.microsoft.com/playwright:v1.56.1
+      image: mcr.microsoft.com/playwright:v1.57.0
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
