@@ -37,7 +37,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.56.1
+      image: mcr.microsoft.com/playwright:v1.57.0
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     strategy:
@@ -45,7 +45,7 @@ jobs:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
