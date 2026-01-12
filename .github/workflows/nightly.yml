@@ -37,7 +37,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.55.1
+      image: mcr.microsoft.com/playwright:v1.57.0
     env:
       BASE_URL: ${{ vars.BASE_URL }}
     strategy:
@@ -45,13 +45,13 @@ jobs:
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - name: Install pnpm
         uses: pnpm/action-setup@v4
         with:
           run_install: false
       - name: Install Node.js
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v6
         with:
           node-version: lts/*
           cache: 'pnpm'
@@ -61,7 +61,7 @@ jobs:
         run: xvfb-run pnpm exec playwright test ${{ github.event.inputs.test_command || '--grep-invert "@devRun"' }} --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
       - name: Upload test results and artifacts
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v5
         with:
           name: allure-results-${{ matrix.group }}
           path: allure-results
