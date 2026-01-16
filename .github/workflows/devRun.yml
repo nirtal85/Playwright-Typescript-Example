@@ -59,7 +59,7 @@ jobs:
           } >> environment.properties
       - name: Generate Allure HTML report
         if: always()
-        run: pnpm exec allure generate allure-results --output allure-report --clean
+        run: pnpm exec allure generate allure-results --output allure-report
       - name: Allure PR summary
         if: always()
         uses: allure-framework/allure-action@v0.6.2
