@@ -62,7 +62,7 @@ jobs:
         run: pnpm exec allure generate allure-results --output allure-report --clean
       - name: Allure PR summary
         if: always()
-        uses: allure-framework/allure-report@v0
+        uses: allure-framework/allure-action@v0.6.2
         with:
           report-directory: "./allure-report"
           github-token: ${{ secrets.GITHUB_TOKEN }}
