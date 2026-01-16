@@ -2,23 +2,24 @@ name: Nightly regression tests
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: "0 0 * * *"
   workflow_dispatch:
     inputs:
       test_command:
-        description: 'Custom test command'
+        description: "Custom test command"
         required: true
         default: '--grep-invert "@devRun"'
         type: string
       parallelism:
-        description: 'Number of machines to split tests'
+        description: "Number of machines to split tests"
         required: false
         default: 2
         type: number
 
 permissions:
-  contents: write
+  contents: read
   pages: write
+  id-token: write
 
 jobs:
   setup-matrix:
@@ -54,12 +55,15 @@ jobs:
         uses: actions/setup-node@v6
         with:
           node-version: lts/*
-          cache: 'pnpm'
+          cache: "pnpm"
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Run Playwright tests
-        run: xvfb-run pnpm exec playwright test ${{ github.event.inputs.test_command || '--grep-invert "@devRun"' }} --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
-      - name: Upload test results and artifacts
+        run: >
+          xvfb-run pnpm exec playwright test
+          ${{ github.event.inputs.test_command || '--grep-invert "@devRun"' }}
+          --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
+      - name: Upload shard allure-results
         if: always()
         uses: actions/upload-artifact@v5
         with:
@@ -72,8 +76,65 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - name: Merge and Publish Allure Report
-        uses: Valiantsin2021/allure-shard-results-publish@1.0.6
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          add-env: 'true'
+          run_install: false
+      - name: Install Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: lts/*
+          cache: "pnpm"
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: Download all shard results
+        if: always()
+        uses: actions/download-artifact@v5
+        with:
+          pattern: allure-results-*
+          path: ./_shards
+          merge-multiple: true
+      - name: Merge Allure results
+        if: always()
+        run: |
+          mkdir -p allure-results
+          pnpm exec allure merge ./_shards --output allure-results
+      - name: Link Git Information To Allure Results
+        working-directory: allure-results
+        if: always()
+        run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
+          {
+           echo BUILD_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+           echo GIT_BRANCH=${{ github.ref_name }}
+           echo GIT_COMMIT_ID=${{ github.sha }}
+           echo GIT_COMMIT_MESSAGE="$(git show -s --format=%s HEAD)"
+           echo GIT_COMMIT_AUTHOR_NAME="$(git show -s --format='%ae' HEAD)"
+           echo GIT_COMMIT_TIME="$(git show -s --format=%ci HEAD)"
+          } >> environment.properties
+      - name: Generate Allure HTML report (Allure 3 CLI)
+        if: always()
+        run: |
+          pnpm exec allure generate allure-results --output allure-report
+      - name: Upload Pages artifact
+        if: always()
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: allure-report
+
+  deploy_pages:
+    needs: merge-reports
+    if: always()
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

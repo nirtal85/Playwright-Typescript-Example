@@ -9,6 +9,7 @@
 		"@types/node": "24.10.1",
 		"@types/ssh2-sftp-client": "^9.0.4",
 		"@visual-regression-tracker/agent-playwright": "5.3.1",
+		"allure": "^3.0.1",
 		"allure-js-commons": "3.4.2",
 		"allure-playwright": "3.4.2",
 		"axios": "1.13.2",
@@ -31,7 +32,7 @@
 		]
 	},
 	"name": "playwright-typescript",
-	"packageManager": "pnpm@10.24.0",
+	"packageManager": "pnpm@10.28.0+sha512.05df71d1421f21399e053fde567cea34d446fa02c76571441bfc1c7956e98e363088982d940465fd34480d4d90a0668bc12362f8aa88000a64e83d0b0e47be48",
 	"scripts": {
 		"biome:fix": "biome check --write --unsafe --no-errors-on-unmatched || true",
 		"codegen": "playwright codegen",
