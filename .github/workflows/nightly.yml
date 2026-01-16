@@ -65,7 +65,7 @@ jobs:
           --shard=${{ matrix.group }}/${{ github.event.inputs.parallelism || 2 }}
       - name: Upload shard allure-results
         if: always()
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: allure-results-${{ matrix.group }}
           path: allure-results
@@ -91,7 +91,7 @@ jobs:
         run: pnpm install --frozen-lockfile
       - name: Download all shard results
         if: always()
-        uses: actions/download-artifact@v5
+        uses: actions/download-artifact@v7
         with:
           pattern: allure-results-*
           path: ./_shards
