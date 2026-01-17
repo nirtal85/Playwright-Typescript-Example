@@ -94,13 +94,8 @@ jobs:
         uses: actions/download-artifact@v7
         with:
           pattern: allure-results-*
-          path: ./_shards
+          path: allure-results
           merge-multiple: true
-      - name: Merge Allure results
-        if: always()
-        run: |
-          mkdir -p allure-results
-          pnpm exec allure merge ./_shards --output allure-results
       - name: Link Git Information To Allure Results
         working-directory: allure-results
         if: always()
