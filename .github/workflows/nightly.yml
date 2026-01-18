@@ -109,7 +109,7 @@ jobs:
            echo GIT_COMMIT_AUTHOR_NAME="$(git show -s --format='%ae' HEAD)"
            echo GIT_COMMIT_TIME="$(git show -s --format=%ci HEAD)"
           } >> environment.properties
-      - name: Generate Allure HTML report (Allure 3 CLI)
+      - name: Generate Allure HTML report
         if: always()
         run: |
           pnpm exec allure generate allure-results --output allure-report
