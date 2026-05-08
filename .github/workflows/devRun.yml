@@ -26,6 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BASE_URL: ${{ vars.BASE_URL }}
+      HUSKY: 0
     container:
       image: mcr.microsoft.com/playwright:v1.59.1
     steps:

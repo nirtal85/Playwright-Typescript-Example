@@ -41,6 +41,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.59.1
     env:
       BASE_URL: ${{ vars.BASE_URL }}
+      HUSKY: 0
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup-matrix.outputs.matrix) }}
@@ -75,6 +76,8 @@ jobs:
     needs: nightly-test
     if: always()
     runs-on: ubuntu-latest
+    env:
+      HUSKY: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v6
