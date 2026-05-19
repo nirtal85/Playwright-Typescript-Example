@@ -139,6 +139,8 @@ pnpm exec allure generate allure-results --output allure-report --open
 
 👉 [See a Live Example of the Report Here](https://nirtal85.github.io/Playwright-Typescript-Example/)
 
+---
+
 <div align="center">
 
 Found this project useful?
