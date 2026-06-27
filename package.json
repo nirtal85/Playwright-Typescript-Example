@@ -10,7 +10,7 @@
       "@types/node": "24.13.2",
       "@types/ssh2-sftp-client": "9.0.6",
       "@visual-regression-tracker/agent-playwright": "5.3.1",
-      "allure": "3.13.2",
+      "allure": "3.13.1",
       "allure-js-commons": "3.10.2",
       "allure-playwright": "3.10.2",
       "axios": "1.18.1",
