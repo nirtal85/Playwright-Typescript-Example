@@ -10,5 +10,14 @@
 	"pre-commit": {
 		"enabled": true
 	},
+	"dependencyDashboard": true,
+	"internalChecksFilter": "strict",
+	"prCreation": "not-pending",
+	"packageRules": [
+		{
+			"matchDatasources": ["npm"],
+			"minimumReleaseAge": "2 days"
+		}
+	],
 	"schedule": ["monthly"]
 }
