@@ -56,7 +56,7 @@ export class MailinatorService {
 			const messages = await this.getInboxMessages(inbox);
 			const matching = messages
 				.filter((message) => message.subject === subject)
-				.sort((a, b) => b.secondsAgo - a.secondsAgo);
+				.sort((a, b) => b.seconds_ago - a.seconds_ago);
 			if (matching.length > index) {
 				return matching[index];
 			}

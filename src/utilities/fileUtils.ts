@@ -1,6 +1,9 @@
+import * as fs from "node:fs";
 import type { WorkBook, WorkSheet } from "xlsx";
-import xlsx from "xlsx";
+import * as xlsx from "xlsx";
 import type { UserData } from "../entities/UserData";
+
+xlsx.set_fs(fs);
 
 /**
  * Read an Excel file and return its rows as structured objects.
