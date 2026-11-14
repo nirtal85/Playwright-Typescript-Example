@@ -1,6 +1,6 @@
-import {defineConfig} from "@playwright/test";
-import {AUTOMATION_USER_AGENT} from "@src/utilities/constants";
-import {config as dotenvConfig} from "dotenv";
+import { defineConfig } from "@playwright/test";
+import { AUTOMATION_USER_AGENT } from "@src/utilities/constants";
+import { config as dotenvConfig } from "dotenv";
 
 dotenvConfig({ quiet: true });
 
@@ -66,6 +66,7 @@ export default defineConfig({
 	testDir: "./tests",
 	timeout: 15 * 60 * 1000,
 	use: {
+		baseURL: process.env.BASE_URL || "https://playwright.dev",
 		screenshot: {
 			fullPage: true,
 			mode: process.env.CI ? "only-on-failure" : "off",

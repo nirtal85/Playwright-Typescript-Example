@@ -38,7 +38,7 @@ jobs:
     timeout-minutes: 15
     runs-on: ubuntu-latest
     container:
-      image: mcr.microsoft.com/playwright:v1.61.1
+      image: mcr.microsoft.com/playwright:v1.65.0-noble
     env:
       BASE_URL: ${{ vars.BASE_URL }}
       HUSKY: 0

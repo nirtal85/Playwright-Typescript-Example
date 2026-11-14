@@ -28,7 +28,7 @@ jobs:
       BASE_URL: ${{ vars.BASE_URL }}
       HUSKY: 0
     container:
-      image: mcr.microsoft.com/playwright:v1.61.1
+      image: mcr.microsoft.com/playwright:v1.65.0-noble
     steps:
       - name: Checkout
         uses: actions/checkout@v7
