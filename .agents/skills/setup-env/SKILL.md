@@ -12,17 +12,14 @@ Run from the repository root. Use the package manager declared in `package.json`
 Inspect `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml`, and `.github/workflows/devRun.yml`.
 Use a current Node.js LTS release supported by the pinned pnpm (CI uses `lts/*`).
 The repository currently declares `pnpm@11.9.0`; re-read that field before setup if it has changed.
+Reuse that pnpm version if already available; otherwise install the exact declared version using https://pnpm.io/installation.
 
 ```bash
-node --version
-corepack enable
-corepack prepare pnpm@11.9.0 --activate
-pnpm --version
 pnpm install --frozen-lockfile
 pnpm exec playwright install chromium
 ```
 
-If Corepack is missing, install it using https://pnpm.io/installation or use that page's supported method for the exact pinned pnpm version. Do not switch to npm/yarn or create another lockfile.
+Do not switch to npm/yarn or create another lockfile.
 On Linux with missing shared libraries, use `pnpm exec playwright install --with-deps chromium`
 with appropriate system package-manager privileges.
 The installed Playwright package selects the browser revision; do not copy an arbitrary Docker image version.
@@ -35,57 +32,22 @@ The repository has no `.env.example`.
 If a local `.env` is needed, create it only when absent and confirm it is ignored by Git.
 Preserve existing values; populate credentials privately from user-provided values.
 
-`DOMAIN` selects logical environment behavior (default DEV), while `BASE_URL` is read by relevant tests/fixtures.
+`DOMAIN` selects logical environment behavior (default DEV). `playwright.config.ts` uses `BASE_URL` as the base URL, defaulting to https://playwright.dev.
 Choose an intended application URL matching the page objects before execution.
 Database, SFTP, visual regression, and other service credentials are needed only for tests using those integrations.
 Do not invent tokens or run the complete suite merely to check installation.
 
-## Verify
+## Finish setup
 
-Check TypeScript and test discovery first:
-
-```bash
-pnpm exec tsc --noEmit
-pnpm exec playwright test --list --reporter=list
-```
-
-Check Chromium independently of the repository's headed configuration and application fixtures:
-
-```bash
-node --input-type=module - <<'JS'
-import { chromium } from "@playwright/test";
-
-const browser = await chromium.launch({ headless: true });
-try {
-  const page = await browser.newPage();
-  await page.setContent("<title>setup-env</title>");
-  if ((await page.title()) !== "setup-env") throw new Error("Unexpected page title");
-} finally {
-  await browser.close();
-}
-console.log("Chromium launch passed");
-JS
-```
-
-After the intended application and necessary settings are available, run the pre-merge selection:
-
-```bash
-pnpm run test:dev
-```
-
-`playwright.config.ts` forces `launchOptions.headless: false`.
-On Linux without a display, install Xvfb through the distribution's package manager and use:
-
-```bash
-xvfb-run -a pnpm run test:dev
-```
-
-This application run contacts websites and may require credentials; test listing and the standalone browser check do not execute those application fixtures.
+Setup is complete when frozen dependency installation and the Chromium installer exit successfully with no unresolved host-validation warnings.
+Read the installer output: Playwright can warn about missing system libraries without failing. Resolve those warnings using the Linux dependency installation above; if blocked, report setup as incomplete and list the unresolved dependencies.
+Stop there: do not run TypeScript checks, collect or run tests, launch a browser, or visit the target application unless explicitly requested.
+Successful installation is not a claim that application tests pass.
 
 ## Report and troubleshoot
 
-Report Node/pnpm versions, frozen installation, type checking, discovery, browser launch, and application tests separately.
-Identify failures and skipped checks explicitly; discovery alone does not establish successful browser execution.
+Report dependency and Chromium installation outcomes, any unresolved host-validation warnings, and state that tests and TypeScript checks were not run and display support was not checked.
+The default Playwright configuration is headed. On Linux without a display, Xvfb is an option for a separately requested test run; do not install it or run tests as part of this setup.
 Use `pnpm exec` or package scripts for project tools rather than global `playwright`.
 For missing binaries, repeat the local Playwright installer; for missing Linux libraries use `--with-deps`; for display failures use Xvfb.
 On registry/download errors, retain proxy/TLS settings and report the actual error. Do not regenerate the lockfile or change test configuration as a setup workaround.
