@@ -1,3 +1,9 @@
 allowBuilds:
   cpu-features: false
   ssh2: false
+
+# Allure 3.33.0 still pins glob 13; patched glob also pulls patched minimatch.
+overrides:
+  'allure>glob': 14.0.2
+  '@allurereport/ci>glob': 14.0.2
+  '@allurereport/core>glob': 14.0.2

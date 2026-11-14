@@ -1,9 +1,8 @@
 {
 	"compilerOptions": {
-		"baseUrl": ".",
 		"paths": {
-			"@src/*": ["src/*"],
-			"@resources/*": ["resources/*"]
+			"@src/*": ["./src/*"],
+			"@resources/*": ["./resources/*"]
 		},
 		"allowJs": true,
 		"esModuleInterop": true,
